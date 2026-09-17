@@ -1,0 +1,1166 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>WB Help – Admin Panel</title>
+
+  <meta name="robots" content="noindex,nofollow">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =========================
+       ADMIN PANEL
+    ========================= */
+
+    .admin-page{
+      min-height:100vh;
+      background:var(--bg);
+    }
+
+    .admin-header{
+      background:var(--card);
+      border-bottom:1px solid var(--border);
+      padding:16px 0;
+    }
+
+    .admin-header-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+    }
+
+    .admin-brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .admin-logo{
+      width:45px;
+      height:45px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,var(--primary),var(--teal));
+      color:#fff;
+      font-weight:800;
+    }
+
+    .admin-title{
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .admin-subtitle{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .admin-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .admin-main{
+      padding:30px 0 50px;
+    }
+
+    .admin-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.4fr) minmax(280px,.6fr);
+      gap:22px;
+      align-items:start;
+    }
+
+    .admin-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+      padding:22px;
+    }
+
+    .admin-card h2{
+      margin:0 0 5px;
+      font-size:22px;
+    }
+
+    .admin-card-desc{
+      margin:0 0 22px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .admin-form{
+      display:grid;
+      gap:16px;
+    }
+
+    .admin-field{
+      display:grid;
+      gap:7px;
+    }
+
+    .admin-field label{
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .admin-field input,
+    .admin-field select,
+    .admin-field textarea{
+      width:100%;
+      padding:12px 13px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:var(--card);
+      color:var(--text);
+      outline:none;
+    }
+
+    .admin-field input:focus,
+    .admin-field select:focus,
+    .admin-field textarea:focus{
+      border-color:var(--primary);
+    }
+
+    .admin-field textarea{
+      min-height:220px;
+      resize:vertical;
+      line-height:1.7;
+    }
+
+    .admin-two{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .admin-checkbox{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+    }
+
+    .admin-checkbox input{
+      width:auto;
+    }
+
+    .admin-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      padding-top:5px;
+    }
+
+    .admin-btn{
+      border:0;
+      border-radius:10px;
+      padding:11px 16px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .admin-btn-primary{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .admin-btn-secondary{
+      background:#eef5ff;
+      color:var(--primary);
+    }
+
+    .admin-btn-danger{
+      background:#fff0f0;
+      color:#c62828;
+    }
+
+    .admin-preview{
+      min-height:180px;
+      border:1px dashed var(--border);
+      border-radius:12px;
+      padding:16px;
+      background:var(--bg);
+    }
+
+    .preview-thumb{
+      height:130px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      margin-bottom:15px;
+      background:linear-gradient(135deg,#dcebff,#ddf7f2);
+      color:var(--primary);
+      font-weight:800;
+    }
+
+    .preview-category{
+      display:inline-block;
+      padding:4px 9px;
+      border-radius:999px;
+      background:#eef5ff;
+      color:var(--primary);
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .preview-title{
+      margin:9px 0 5px;
+      font-size:20px;
+      line-height:1.4;
+    }
+
+    .preview-description{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .preview-date{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:10px;
+    }
+
+    .admin-notice{
+      padding:13px 15px;
+      border-left:4px solid var(--primary);
+      background:#eaf3ff;
+      border-radius:9px;
+      color:var(--text);
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    .dark .admin-notice{
+      background:#152e46;
+    }
+
+    .dark .admin-btn-secondary{
+      background:#17314a;
+      color:#fff;
+    }
+
+    .dark .admin-btn-danger{
+      background:#3a2024;
+      color:#ffb4b4;
+    }
+
+    .saved-message{
+      display:none;
+      padding:11px 13px;
+      border-radius:9px;
+      background:#e8f7ef;
+      color:#19733d;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .saved-message.show{
+      display:block;
+    }
+
+    @media(max-width:850px){
+      .admin-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:600px){
+
+      .admin-two{
+        grid-template-columns:1fr;
+      }
+
+      .admin-header-inner{
+        align-items:flex-start;
+      }
+
+      .admin-actions{
+        flex-shrink:0;
+      }
+
+      .admin-main{
+        padding-top:20px;
+      }
+
+      .admin-card{
+        padding:17px;
+      }
+
+    }
+  </style>
+</head>
+
+
+<body>
+
+<div class="admin-page">
+
+  <!-- ADMIN HEADER -->
+  <header class="admin-header">
+
+    <div class="container admin-header-inner">
+
+      <div class="admin-brand">
+
+        <div class="admin-logo">
+          WB
+        </div>
+
+        <div>
+          <div class="admin-title">
+            WB Help Admin
+          </div>
+
+          <span class="admin-subtitle">
+            Post Management Panel
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="admin-actions">
+
+        <button
+          id="themeToggle"
+          class="icon-btn"
+          type="button"
+          aria-label="Toggle dark mode"
+        >
+          ◐
+        </button>
+
+        <a
+          href="index.html"
+          class="btn btn-light"
+        >
+          Website
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- ADMIN MAIN -->
+  <main class="admin-main">
+
+    <div class="container">
+
+
+      <div class="admin-notice">
+
+        <strong>Admin Panel</strong><br>
+
+        এখান থেকে নতুন পোস্টের তথ্য তৈরি ও Preview করা যাবে।
+        Publish system পরের ধাপে যুক্ত করা হবে।
+
+      </div>
+
+
+      <div id="savedMessage" class="saved-message">
+        Draft browser-এ save হয়েছে।
+      </div>
+
+
+      <div class="admin-grid">
+
+
+        <!-- POST FORM -->
+        <section class="admin-card">
+
+          <h2>
+            ➕ Create New Post
+          </h2>
+
+          <p class="admin-card-desc">
+            নতুন পোস্টের তথ্য এখানে লিখুন।
+          </p>
+
+
+          <form id="postForm" class="admin-form">
+
+
+            <!-- TITLE -->
+            <div class="admin-field">
+
+              <label for="postTitle">
+                Post Title *
+              </label>
+
+              <input
+                id="postTitle"
+                type="text"
+                placeholder="যেমন: SSC CHSL 2026 Recruitment"
+                required
+              >
+
+            </div>
+
+
+            <!-- CATEGORY + DATE -->
+            <div class="admin-two">
+
+
+              <div class="admin-field">
+
+                <label for="postCategory">
+                  Category *
+                </label>
+
+                <select id="postCategory" required>
+
+                  <option value="">
+                    Category নির্বাচন করুন
+                  </option>
+
+                  <option value="সরকারি চাকরি">
+                    সরকারি চাকরি
+                  </option>
+
+                  <option value="Admit Card">
+                    Admit Card
+                  </option>
+
+                  <option value="Result">
+                    Result
+                  </option>
+
+                  <option value="Government Schemes">
+                    Government Schemes
+                  </option>
+
+                  <option value="Government Services">
+                    Government Services
+                  </option>
+
+                  <option value="Scholarship">
+                    Scholarship
+                  </option>
+
+                  <option value="Important Updates">
+                    Important Updates
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="admin-field">
+
+                <label for="postDate">
+                  Publish Date *
+                </label>
+
+                <input
+                  id="postDate"
+                  type="date"
+                  required
+                >
+
+              </div>
+
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <div class="admin-field">
+
+              <label for="postDescription">
+                Short Description
+              </label>
+
+              <textarea
+                id="postDescription"
+                style="min-height:110px"
+                placeholder="পোস্টটির সংক্ষিপ্ত description লিখুন..."
+              ></textarea>
+
+            </div>
+
+
+            <!-- CONTENT -->
+            <div class="admin-field">
+
+              <label for="postContent">
+                Full Post Content *
+              </label>
+
+              <textarea
+                id="postContent"
+                placeholder="এখানে সম্পূর্ণ পোস্ট লিখুন...
+
+উদাহরণ:
+
+যোগ্যতা:
+আবেদনের তারিখ:
+শেষ তারিখ:
+বয়স:
+আবেদন পদ্ধতি:
+
+গুরুত্বপূর্ণ তথ্য..."
+                required
+              ></textarea>
+
+            </div>
+
+
+            <!-- OFFICIAL LINK -->
+            <div class="admin-field">
+
+              <label for="officialLink">
+                Official Website / Apply Link
+              </label>
+
+              <input
+                id="officialLink"
+                type="url"
+                placeholder="https://example.gov.in/"
+              >
+
+            </div>
+
+
+            <!-- IMAGE -->
+            <div class="admin-field">
+
+              <label for="imageUrl">
+                Featured Image URL
+              </label>
+
+              <input
+                id="imageUrl"
+                type="url"
+                placeholder="https://example.com/image.jpg"
+              >
+
+            </div>
+
+
+            <!-- SLUG -->
+            <div class="admin-field">
+
+              <label for="postSlug">
+                Post Slug
+              </label>
+
+              <input
+                id="postSlug"
+                type="text"
+                placeholder="ssc-chsl-2026"
+              >
+
+              <small class="meta">
+                উদাহরণ: ssc-chsl-2026
+              </small>
+
+            </div>
+
+
+            <!-- CHECKBOX -->
+            <label class="admin-checkbox">
+
+              <input
+                id="showHome"
+                type="checkbox"
+                checked
+              >
+
+              Homepage-এর Latest Updates-এ দেখাবে
+
+            </label>
+
+
+            <!-- BUTTONS -->
+            <div class="admin-buttons">
+
+              <button
+                type="button"
+                id="previewBtn"
+                class="admin-btn admin-btn-secondary"
+              >
+                👁 Preview
+              </button>
+
+
+              <button
+                type="button"
+                id="saveBtn"
+                class="admin-btn admin-btn-secondary"
+              >
+                💾 Save Draft
+              </button>
+
+
+              <button
+                type="button"
+                id="clearBtn"
+                class="admin-btn admin-btn-danger"
+              >
+                🗑 Clear
+              </button>
+
+
+              <button
+                type="submit"
+                class="admin-btn admin-btn-primary"
+              >
+                🚀 Prepare Post
+              </button>
+
+            </div>
+
+
+          </form>
+
+        </section>
+
+
+        <!-- PREVIEW -->
+        <aside class="admin-card">
+
+          <h2>
+            👁 Post Preview
+          </h2>
+
+          <p class="admin-card-desc">
+            পোস্টটি publish করার আগে এখানে দেখুন।
+          </p>
+
+
+          <div id="postPreview" class="admin-preview">
+
+            <div class="preview-thumb">
+              WB HELP
+            </div>
+
+            <span class="preview-category">
+              Category
+            </span>
+
+            <h3 class="preview-title">
+              আপনার Post Title এখানে দেখা যাবে
+            </h3>
+
+            <p class="preview-description">
+              Short description এখানে দেখা যাবে।
+            </p>
+
+            <div class="preview-date">
+              প্রকাশিত: —
+            </div>
+
+          </div>
+
+        </aside>
+
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script>
+
+  /* =========================
+     DARK MODE
+  ========================= */
+
+  const themeButton =
+    document.getElementById("themeToggle");
+
+  const savedTheme =
+    localStorage.getItem("wbhelp-theme");
+
+  if(savedTheme === "dark"){
+    document.body.classList.add("dark");
+  }
+
+  themeButton.addEventListener("click", function(){
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+      "wbhelp-theme",
+      document.body.classList.contains("dark")
+        ? "dark"
+        : "light"
+    );
+
+  });
+
+
+  /* =========================
+     ELEMENTS
+  ========================= */
+
+  const form =
+    document.getElementById("postForm");
+
+  const title =
+    document.getElementById("postTitle");
+
+  const category =
+    document.getElementById("postCategory");
+
+  const date =
+    document.getElementById("postDate");
+
+  const description =
+    document.getElementById("postDescription");
+
+  const content =
+    document.getElementById("postContent");
+
+  const officialLink =
+    document.getElementById("officialLink");
+
+  const imageUrl =
+    document.getElementById("imageUrl");
+
+  const slug =
+    document.getElementById("postSlug");
+
+  const showHome =
+    document.getElementById("showHome");
+
+  const preview =
+    document.getElementById("postPreview");
+
+  const savedMessage =
+    document.getElementById("savedMessage");
+
+
+  /* =========================
+     DEFAULT DATE
+  ========================= */
+
+  if(!date.value){
+
+    const today =
+      new Date().toISOString().split("T")[0];
+
+    date.value = today;
+
+  }
+
+
+  /* =========================
+     PREVIEW
+  ========================= */
+
+  function updatePreview(){
+
+    const postTitle =
+      title.value.trim() ||
+      "আপনার Post Title এখানে দেখা যাবে";
+
+    const postCategory =
+      category.value ||
+      "Category";
+
+    const postDescription =
+      description.value.trim() ||
+      "Short description এখানে দেখা যাবে।";
+
+    const postDate =
+      date.value ||
+      "—";
+
+    const image =
+      imageUrl.value.trim();
+
+
+    let imageHTML = `
+      <div class="preview-thumb">
+        WB HELP
+      </div>
+    `;
+
+
+    if(image){
+
+      imageHTML = `
+        <div class="preview-thumb"
+             style="
+               background-image:url('${image}');
+               background-size:cover;
+               background-position:center;
+             ">
+        </div>
+      `;
+
+    }
+
+
+    preview.innerHTML = `
+
+      ${imageHTML}
+
+      <span class="preview-category">
+        ${escapeHTML(postCategory)}
+      </span>
+
+      <h3 class="preview-title">
+        ${escapeHTML(postTitle)}
+      </h3>
+
+      <p class="preview-description">
+        ${escapeHTML(postDescription)}
+      </p>
+
+      <div class="preview-date">
+        প্রকাশিত: ${escapeHTML(postDate)}
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================
+     ESCAPE HTML
+  ========================= */
+
+  function escapeHTML(text){
+
+    return text
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+  }
+
+
+  /* =========================
+     AUTO PREVIEW
+  ========================= */
+
+  [
+    title,
+    category,
+    date,
+    description,
+    imageUrl
+  ].forEach(function(element){
+
+    element.addEventListener(
+      "input",
+      updatePreview
+    );
+
+    element.addEventListener(
+      "change",
+      updatePreview
+    );
+
+  });
+
+
+  /* =========================
+     PREVIEW BUTTON
+  ========================= */
+
+  document
+    .getElementById("previewBtn")
+    .addEventListener("click", function(){
+
+      updatePreview();
+
+      preview.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    });
+
+
+  /* =========================
+     SAVE DRAFT
+  ========================= */
+
+  document
+    .getElementById("saveBtn")
+    .addEventListener("click", function(){
+
+      const draft = {
+
+        title:title.value,
+
+        category:category.value,
+
+        date:date.value,
+
+        description:description.value,
+
+        content:content.value,
+
+        officialLink:officialLink.value,
+
+        imageUrl:imageUrl.value,
+
+        slug:slug.value,
+
+        showHome:showHome.checked
+
+      };
+
+
+      localStorage.setItem(
+        "wbhelp-draft",
+        JSON.stringify(draft)
+      );
+
+
+      savedMessage.classList.add("show");
+
+      savedMessage.textContent =
+        "✅ Draft browser-এ save হয়েছে।";
+
+
+      setTimeout(function(){
+
+        savedMessage.classList.remove("show");
+
+      },3000);
+
+    });
+
+
+  /* =========================
+     LOAD DRAFT
+  ========================= */
+
+  const savedDraft =
+    localStorage.getItem("wbhelp-draft");
+
+
+  if(savedDraft){
+
+    try{
+
+      const draft =
+        JSON.parse(savedDraft);
+
+
+      title.value =
+        draft.title || "";
+
+      category.value =
+        draft.category || "";
+
+      date.value =
+        draft.date || date.value;
+
+      description.value =
+        draft.description || "";
+
+      content.value =
+        draft.content || "";
+
+      officialLink.value =
+        draft.officialLink || "";
+
+      imageUrl.value =
+        draft.imageUrl || "";
+
+      slug.value =
+        draft.slug || "";
+
+      showHome.checked =
+        draft.showHome !== false;
+
+
+      updatePreview();
+
+    }catch(error){
+
+      console.log(
+        "Draft load failed"
+      );
+
+    }
+
+  }
+
+
+  /* =========================
+     CLEAR
+  ========================= */
+
+  document
+    .getElementById("clearBtn")
+    .addEventListener("click", function(){
+
+      if(!confirm(
+        "সব তথ্য মুছে ফেলতে চান?"
+      )){
+        return;
+      }
+
+
+      form.reset();
+
+      localStorage.removeItem(
+        "wbhelp-draft"
+      );
+
+
+      date.value =
+        new Date()
+          .toISOString()
+          .split("T")[0];
+
+
+      showHome.checked = true;
+
+      updatePreview();
+
+    });
+
+
+  /* =========================
+     PREPARE POST
+  ========================= */
+
+  form.addEventListener(
+    "submit",
+    function(event){
+
+      event.preventDefault();
+
+
+      if(!title.value.trim()){
+
+        alert(
+          "Post Title লিখুন।"
+        );
+
+        title.focus();
+
+        return;
+
+      }
+
+
+      if(!category.value){
+
+        alert(
+          "Category নির্বাচন করুন।"
+        );
+
+        category.focus();
+
+        return;
+
+      }
+
+
+      if(!content.value.trim()){
+
+        alert(
+          "Full Post Content লিখুন।"
+        );
+
+        content.focus();
+
+        return;
+
+      }
+
+
+      if(!slug.value.trim()){
+
+        const generatedSlug =
+          title.value
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g,"-")
+            .replace(/^-+|-+$/g,"");
+
+
+        slug.value =
+          generatedSlug ||
+          "new-post";
+
+      }
+
+
+      const postData = {
+
+        title:title.value.trim(),
+
+        category:category.value,
+
+        date:date.value,
+
+        description:
+          description.value.trim(),
+
+        content:
+          content.value.trim(),
+
+        officialLink:
+          officialLink.value.trim(),
+
+        imageUrl:
+          imageUrl.value.trim(),
+
+        slug:
+          slug.value.trim(),
+
+        showHome:
+          showHome.checked
+
+      };
+
+
+      localStorage.setItem(
+        "wbhelp-last-post",
+        JSON.stringify(postData)
+      );
+
+
+      savedMessage.classList.add("show");
+
+      savedMessage.textContent =
+        "✅ Post data তৈরি হয়েছে। Backend publish system পরের ধাপে যুক্ত হবে।";
+
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+
+      console.log(
+        "WB Help Post:",
+        postData
+      );
+
+    }
+  );
+
+</script>
+
+</body>
+</html>
