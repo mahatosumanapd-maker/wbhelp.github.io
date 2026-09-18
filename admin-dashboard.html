@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>WB Help Admin Dashboard</title>
+
+<meta name="robots" content="noindex,nofollow">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,"Noto Sans Bengali",sans-serif;
+background:#f5f8fc;
+color:#17324d
+}
+
+header{
+background:#0b63ce;
+color:#fff;
+padding:16px 20px
+}
+
+.header-inner{
+max-width:1100px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px
+}
+
+.logo{
+font-size:21px;
+font-weight:800
+}
+
+.logout{
+border:0;
+background:#fff;
+color:#0b63ce;
+padding:9px 14px;
+border-radius:9px;
+font-weight:700;
+cursor:pointer
+}
+
+.container{
+width:min(1100px,92%);
+margin:25px auto
+}
+
+.dashboard-title{
+margin-bottom:20px
+}
+
+.dashboard-title h1{
+margin:0 0 5px;
+font-size:28px
+}
+
+.dashboard-title p{
+margin:0;
+color:#63758a
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px
+}
+
+.card{
+background:#fff;
+border:1px solid #e2eaf2;
+border-radius:16px;
+padding:22px;
+box-shadow:0 8px 28px rgba(17,52,85,.08)
+}
+
+.card h2{
+margin-top:0;
+font-size:20px
+}
+
+.field{
+margin-bottom:15px
+}
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:700;
+font-size:14px
+}
+
+input,textarea,select{
+width:100%;
+padding:11px 12px;
+border:1px solid #dce5ee;
+border-radius:9px;
+font:inherit;
+outline:none
+}
+
+input:focus,textarea:focus,select:focus{
+border-color:#0b63ce
+}
+
+textarea{
+min-height:130px;
+resize:vertical
+}
+
+.btn{
+border:0;
+border-radius:9px;
+padding:11px 15px;
+font-weight:700;
+cursor:pointer
+}
+
+.btn-primary{
+background:#0b63ce;
+color:#fff
+}
+
+.btn-light{
+background:#eef5ff;
+color:#0b63ce
+}
+
+.btn-danger{
+background:#ffecec;
+color:#c62828
+}
+
+.actions{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-top:15px
+}
+
+.preview{
+margin-top:20px;
+padding:18px;
+background:#f7fafc;
+border:1px dashed #dce5ee;
+border-radius:12px
+}
+
+.preview h3{
+margin-top:0
+}
+
+.status{
+margin-top:15px;
+padding:11px;
+border-radius:9px;
+display:none
+}
+
+.success{
+display:block;
+background:#e9f8f2;
+color:#08795f
+}
+
+.post-list{
+display:grid;
+gap:12px
+}
+
+.post-item{
+border:1px solid #e2eaf2;
+border-radius:12px;
+padding:15px;
+background:#fff
+}
+
+.post-item h3{
+margin:0 0 5px
+}
+
+.meta{
+font-size:12px;
+color:#63758a
+}
+
+.empty{
+padding:20px;
+text-align:center;
+color:#63758a;
+border:1px dashed #dce5ee;
+border-radius:10px
+}
+
+@media(max-width:700px){
+.grid{
+grid-template-columns:1fr
+}
+
+.header-inner{
+align-items:flex-start
+}
+
+.dashboard-title h1{
+font-size:24px
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+
+<div class="logo">
+WB Help — Admin
+</div>
+
+<button class="logout" id="logoutBtn">
+Logout
+</button>
+
+</div>
+</header>
+
+<main class="container">
+
+<div class="dashboard-title">
+<h1>Admin Dashboard</h1>
+<p>এখান থেকে নতুন পোস্ট তৈরি ও Preview করতে পারবে।</p>
+</div>
+
+<div class="grid">
+
+<!-- CREATE POST -->
+
+<section class="card">
+
+<h2>📝 Create New Post</h2>
+
+<form id="postForm">
+
+<div class="field">
+<label for="postTitle">Post Title</label>
+
+<input
+type="text"
+id="postTitle"
+placeholder="যেমন: SSC CHSL 2026"
+required>
+</div>
+
+<div class="field">
+<label for="postCategory">Category</label>
+
+<select id="postCategory" required>
+
+<option value="">Category নির্বাচন করুন</option>
+
+<option value="সরকারি চাকরি">
+সরকারি চাকরি
+</option>
+
+<option value="Admit Card">
+Admit Card
+</option>
+
+<option value="Result">
+Result
+</option>
+
+<option value="Government Schemes">
+Government Schemes
+</option>
+
+<option value="Government Services">
+Government Services
+</option>
+
+<option value="Important Updates">
+Important Updates
+</option>
+
+</select>
+</div>
+
+<div class="field">
+<label for="postDate">Publish Date</label>
+
+<input
+type="date"
+id="postDate"
+required>
+</div>
+
+<div class="field">
+<label for="postDescription">Short Description</label>
+
+<textarea
+id="postDescription"
+placeholder="পোস্ট সম্পর্কে সংক্ষিপ্ত তথ্য লিখুন..."
+required></textarea>
+</div>
+
+<div class="field">
+<label for="officialLink">
+Official Website / Apply Link
+</label>
+
+<input
+type="url"
+id="officialLink"
+placeholder="https://example.com">
+</div>
+
+<div class="actions">
+
+<button
+type="button"
+class="btn btn-light"
+id="previewBtn">
+👁️ Preview
+</button>
+
+<button
+type="submit"
+class="btn btn-primary">
+💾 Save Post
+</button>
+
+</div>
+
+</form>
+
+<div id="status" class="status"></div>
+
+</section>
+
+
+<!-- PREVIEW -->
+
+<section class="card">
+
+<h2>👁️ Post Preview</h2>
+
+<div id="previewBox" class="preview">
+
+<h3>এখানে Preview দেখা যাবে</h3>
+
+<p class="meta">
+Post-এর তথ্য লিখে Preview চাপুন।
+</p>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- SAVED POSTS -->
+
+<section class="card" style="margin-top:20px">
+
+<h2>📚 Saved Posts</h2>
+
+<div id="postList" class="post-list"></div>
+
+</section>
+
+</main>
+
+
+<script>
+
+"use strict";
+
+
+/* =========================
+   LOGIN CHECK
+========================= */
+
+const loggedIn =
+sessionStorage.getItem("wbhelp_admin_login");
+
+if(loggedIn !== "true"){
+
+window.location.href="admin.html";
+
+}
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const form =
+document.getElementById("postForm");
+
+const title =
+document.getElementById("postTitle");
+
+const category =
+document.getElementById("postCategory");
+
+const date =
+document.getElementById("postDate");
+
+const description =
+document.getElementById("postDescription");
+
+const officialLink =
+document.getElementById("officialLink");
+
+const previewBtn =
+document.getElementById("previewBtn");
+
+const previewBox =
+document.getElementById("previewBox");
+
+const statusBox =
+document.getElementById("status");
+
+const postList =
+document.getElementById("postList");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+
+/* =========================
+   DEFAULT DATE
+========================= */
+
+const today =
+new Date().toISOString().split("T")[0];
+
+date.value=today;
+
+
+/* =========================
+   STORAGE
+========================= */
+
+function getPosts(){
+
+try{
+
+return JSON.parse(
+localStorage.getItem("wbhelp_posts") || "[]"
+);
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
+
+function savePosts(posts){
+
+localStorage.setItem(
+"wbhelp_posts",
+JSON.stringify(posts)
+);
+
+}
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+function showPreview(){
+
+const titleValue =
+title.value.trim();
+
+const categoryValue =
+category.value;
+
+const dateValue =
+date.value;
+
+const descriptionValue =
+description.value.trim();
+
+const linkValue =
+officialLink.value.trim();
+
+
+if(!titleValue){
+
+previewBox.innerHTML=
+"<p>Post Title লিখুন।</p>";
+
+return;
+
+}
+
+
+previewBox.innerHTML=`
+
+<div>
+<span style="
+background:#eef5ff;
+color:#0b63ce;
+padding:4px 9px;
+border-radius:20px;
+font-size:11px;
+font-weight:700;
+">
+${categoryValue || "Category"}
+</span>
+
+<h3>${escapeHTML(titleValue)}</h3>
+
+<p>
+${escapeHTML(descriptionValue)}
+</p>
+
+<p class="meta">
+প্রকাশিত: ${dateValue || "Date"}
+</p>
+
+${
+linkValue
+?
+`<a
+href="${escapeAttribute(linkValue)}"
+target="_blank"
+rel="noopener"
+class="btn btn-primary">
+Official Website
+</a>`
+:""
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   SAVE POST
+========================= */
+
+form.addEventListener(
+"submit",
+function(event){
+
+event.preventDefault();
+
+
+const post={
+
+id:Date.now(),
+
+title:title.value.trim(),
+
+category:category.value,
+
+date:date.value,
+
+description:description.value.trim(),
+
+officialLink:officialLink.value.trim()
+
+};
+
+
+const posts=getPosts();
+
+posts.unshift(post);
+
+savePosts(posts);
+
+renderPosts();
+
+
+statusBox.textContent=
+"✅ Post সফলভাবে Save হয়েছে।";
+
+statusBox.className=
+"status success";
+
+
+form.reset();
+
+date.value=today;
+
+previewBox.innerHTML=
+"<h3>Post Save হয়েছে</h3><p class='meta'>নতুন Post তৈরি করতে আবার তথ্য লিখুন।</p>";
+
+setTimeout(function(){
+
+statusBox.style.display="none";
+
+},3000);
+
+});
+
+
+/* =========================
+   RENDER POSTS
+========================= */
+
+function renderPosts(){
+
+const posts=getPosts();
+
+
+if(!posts.length){
+
+postList.innerHTML=
+'<div class="empty">এখনও কোনও Post Save করা হয়নি।</div>';
+
+return;
+
+}
+
+
+postList.innerHTML=
+posts.map(function(post){
+
+return `
+
+<div class="post-item">
+
+<h3>
+${escapeHTML(post.title)}
+</h3>
+
+<div class="meta">
+${escapeHTML(post.category)}
+•
+${escapeHTML(post.date)}
+</div>
+
+<p>
+${escapeHTML(post.description)}
+</p>
+
+<div class="actions">
+
+<button
+class="btn btn-danger"
+onclick="deletePost(${post.id})">
+🗑️ Delete
+</button>
+
+</div>
+
+</div>
+
+`;
+
+}).join("");
+
+}
+
+
+/* =========================
+   DELETE POST
+========================= */
+
+window.deletePost=function(id){
+
+const confirmDelete =
+confirm("এই Post-টি Delete করতে চান?");
+
+if(!confirmDelete){
+
+return;
+
+}
+
+
+const posts=
+getPosts().filter(
+function(post){
+return post.id!==id;
+}
+);
+
+savePosts(posts);
+
+renderPosts();
+
+};
+
+
+/* =========================
+   HTML SECURITY
+========================= */
+
+function escapeHTML(value){
+
+return String(value)
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+return String(value)
+
+.replace(/"/g,"&quot;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;");
+
+}
+
+
+/* =========================
+   PREVIEW BUTTON
+========================= */
+
+previewBtn.addEventListener(
+"click",
+showPreview
+);
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutBtn.addEventListener(
+"click",
+function(){
+
+sessionStorage.removeItem(
+"wbhelp_admin_login"
+);
+
+window.location.href="admin.html";
+
+});
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+renderPosts();
+
+</script>
+
+</body>
+</html>
