@@ -221,68 +221,94 @@
 
   </main>
 
-  <script>
-    "use strict";
+<script>
+"use strict";
 
-    document.addEventListener("DOMContentLoaded", function () {
+const API_URL = "https://f16e35d9-wbhelp-github-io.mahatosumanapd.workers.dev";
 
-      const loginForm = document.getElementById("loginForm");
-      const usernameInput = document.getElementById("username");
-      const passwordInput = document.getElementById("password");
-      const errorMessage = document.getElementById("errorMessage");
+document.addEventListener("DOMContentLoaded", function () {
 
-      if (!loginForm || !usernameInput || !passwordInput || !errorMessage) {
-        return;
+  const loginForm = document.getElementById("loginForm");
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const errorMessage = document.getElementById("errorMessage");
+
+  if (!loginForm) return;
+
+  loginForm.addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+
+    errorMessage.style.display = "none";
+
+    const button = loginForm.querySelector(".login-btn");
+
+    button.disabled = true;
+    button.textContent = "⏳ Login হচ্ছে...";
+
+    try {
+
+      const response = await fetch(
+        API_URL + "/api/login",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+
+        sessionStorage.setItem(
+          "wbhelp_admin_login",
+          "true"
+        );
+
+        window.location.href =
+          "admin-dashboard.html";
+
+      } else {
+
+        errorMessage.textContent =
+          data.message ||
+          "Username অথবা Password ভুল।";
+
+        errorMessage.style.display = "block";
+
+        passwordInput.value = "";
+        passwordInput.focus();
       }
 
-      loginForm.addEventListener("submit", function (event) {
+    } catch (error) {
 
-        event.preventDefault();
+      console.error(error);
 
-        const username = usernameInput.value.trim();
-        const password = passwordInput.value;
+      errorMessage.textContent =
+        "Server-এর সঙ্গে যোগাযোগ করা যাচ্ছে না।";
 
-        /*
-          DEMO LOGIN
+      errorMessage.style.display = "block";
 
-          Username: admin
-          Password: WBHelp@2026
+    } finally {
 
-          এটি final security নয়।
-        */
+      button.disabled = false;
+      button.textContent = "🔐 Login";
+    }
 
-        if (
-          username === "admin" &&
-          password === "WBHelp@2026"
-        ) {
+  });
 
-          try {
-            sessionStorage.setItem(
-              "wbhelp_admin_login",
-              "true"
-            );
-          } catch (error) {
-            console.log("Session storage unavailable.");
-          }
-
-          window.location.href = "admin-dashboard.html";
-
-        } else {
-
-          errorMessage.style.display = "block";
-
-          passwordInput.value = "";
-          passwordInput.focus();
-
-          setTimeout(function () {
-            errorMessage.style.display = "none";
-          }, 3000);
-        }
-
-      });
-
-    });
-  </script>
-
+});
+</script>
 </body>
 </html>
