@@ -1,0 +1,17 @@
+{
+  "$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
+  "name": "wbhelp-admin-api",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-19",
+
+  "kv_namespaces": [
+    {
+      "binding": "WBHELP_KV",
+      "id": "63bd62cc17f44cc787b7c1d5d0051e15"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}
