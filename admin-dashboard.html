@@ -9,10 +9,7 @@
 <meta name="robots" content="noindex,nofollow">
 
 <style>
-
-*{
-box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
 margin:0;
@@ -100,9 +97,7 @@ font-weight:700;
 font-size:14px
 }
 
-input,
-textarea,
-select{
+input,textarea,select{
 width:100%;
 padding:11px 12px;
 border:1px solid #dce5ee;
@@ -111,19 +106,13 @@ font:inherit;
 outline:none
 }
 
-input:focus,
-textarea:focus,
-select:focus{
+input:focus,textarea:focus,select:focus{
 border-color:#0b63ce
 }
 
 textarea{
-min-height:110px;
+min-height:130px;
 resize:vertical
-}
-
-.full-content{
-min-height:320px
 }
 
 .btn{
@@ -149,11 +138,6 @@ background:#ffecec;
 color:#c62828
 }
 
-.btn-edit{
-background:#fff4d6;
-color:#9a6800
-}
-
 .actions{
 display:flex;
 gap:8px;
@@ -173,35 +157,6 @@ border-radius:12px
 margin-top:0
 }
 
-.preview-section{
-margin-top:20px;
-padding-top:15px;
-border-top:1px solid #e2eaf2
-}
-
-.preview-section h4{
-margin:0 0 8px;
-color:#0b63ce
-}
-
-.info-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px
-}
-
-.info-table th,
-.info-table td{
-border:1px solid #dce5ee;
-padding:8px;
-text-align:left;
-font-size:14px
-}
-
-.info-table th{
-background:#eef5ff
-}
-
 .status{
 margin-top:15px;
 padding:11px;
@@ -213,12 +168,6 @@ display:none
 display:block;
 background:#e9f8f2;
 color:#08795f
-}
-
-.warning{
-display:block;
-background:#fff6dd;
-color:#8a6500
 }
 
 .post-list{
@@ -250,21 +199,7 @@ border:1px dashed #dce5ee;
 border-radius:10px
 }
 
-.small-note{
-font-size:12px;
-color:#63758a;
-margin-top:5px
-}
-
-.section-title{
-margin-top:22px;
-padding-bottom:8px;
-border-bottom:1px solid #e2eaf2;
-font-size:17px
-}
-
 @media(max-width:700px){
-
 .grid{
 grid-template-columns:1fr
 }
@@ -276,61 +211,36 @@ align-items:flex-start
 .dashboard-title h1{
 font-size:24px
 }
-
-.card{
-padding:16px
 }
-
-.info-table{
-font-size:12px
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
 <header>
-
 <div class="header-inner">
 
 <div class="logo">
 WB Help — Admin
 </div>
 
-<button
-class="logout"
-id="logoutBtn">
+<button class="logout" id="logoutBtn">
 Logout
 </button>
 
 </div>
-
 </header>
-
 
 <main class="container">
 
-
 <div class="dashboard-title">
-
 <h1>Admin Dashboard</h1>
-
-<p>
-এখান থেকে সম্পূর্ণ বিস্তারিত Post তৈরি ও Preview করতে পারবে।
-</p>
-
+<p>এখান থেকে নতুন পোস্ট তৈরি ও Preview করতে পারবে।</p>
 </div>
-
 
 <div class="grid">
 
-
-<!-- =========================
-CREATE POST
-========================= -->
+<!-- CREATE POST -->
 
 <section class="card">
 
@@ -338,35 +248,22 @@ CREATE POST
 
 <form id="postForm">
 
-
 <div class="field">
-
-<label for="postTitle">
-Post Title
-</label>
+<label for="postTitle">Post Title</label>
 
 <input
 type="text"
 id="postTitle"
-placeholder="যেমন: SSC CHSL 2026 Recruitment"
+placeholder="যেমন: SSC CHSL 2026"
 required>
-
 </div>
 
-
 <div class="field">
+<label for="postCategory">Category</label>
 
-<label for="postCategory">
-Category
-</label>
+<select id="postCategory" required>
 
-<select
-id="postCategory"
-required>
-
-<option value="">
-Category নির্বাচন করুন
-</option>
+<option value="">Category নির্বাচন করুন</option>
 
 <option value="সরকারি চাকরি">
 সরকারি চাকরি
@@ -393,162 +290,36 @@ Important Updates
 </option>
 
 </select>
-
 </div>
 
-
 <div class="field">
-
-<label for="postDate">
-Publish Date
-</label>
+<label for="postDate">Publish Date</label>
 
 <input
 type="date"
 id="postDate"
 required>
-
 </div>
 
-
 <div class="field">
-
-<label for="postDescription">
-Short Description
-</label>
+<label for="postDescription">Short Description</label>
 
 <textarea
 id="postDescription"
-placeholder="পোস্ট সম্পর্কে ২-৪ লাইনের সংক্ষিপ্ত তথ্য..."
+placeholder="পোস্ট সম্পর্কে সংক্ষিপ্ত তথ্য লিখুন..."
 required></textarea>
-
 </div>
 
-
-<!-- FULL CONTENT -->
-
-<h3 class="section-title">
-📄 Full Post Details
-</h3>
-
-
 <div class="field">
-
-<label for="importantDates">
-📅 Important Dates
-</label>
-
-<textarea
-id="importantDates"
-placeholder="Application Start: 28/09/2026&#10;Last Date: 28/10/2026&#10;Exam Date: পরে জানানো হবে"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="applicationFee">
-💰 Application Fee
-</label>
-
-<textarea
-id="applicationFee"
-placeholder="General / OBC: ₹100&#10;SC / ST: No Fee"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="ageLimit">
-🎂 Age Limit
-</label>
-
-<textarea
-id="ageLimit"
-placeholder="Minimum Age: 18 Years&#10;Maximum Age: 23 Years&#10;Age Relaxation as per rules"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="vacancyDetails">
-📊 Vacancy Details
-</label>
-
-<textarea
-id="vacancyDetails"
-placeholder="Total Vacancy: 354 Posts&#10;Post Name: Technical & Tradesman"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="qualification">
-🎓 Educational Qualification
-</label>
-
-<textarea
-id="qualification"
-placeholder="Post অনুযায়ী শিক্ষাগত যোগ্যতা লিখুন..."></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="selectionProcess">
-📝 Selection Process
-</label>
-
-<textarea
-id="selectionProcess"
-placeholder="Written Exam&#10;Physical Test&#10;Trade Test&#10;Medical Examination"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="howToApply">
-💻 How to Apply
-</label>
-
-<textarea
-id="howToApply"
-placeholder="Official website-এ গিয়ে Online Application Form পূরণ করুন।"></textarea>
-
-</div>
-
-
-<div class="field">
-
-<label for="otherDetails">
-📌 Other Important Details
-</label>
-
-<textarea
-id="otherDetails"
-placeholder="আর কোনও গুরুত্বপূর্ণ তথ্য থাকলে এখানে লিখুন..."></textarea>
-
-</div>
-
-
-<div class="field">
-
 <label for="officialLink">
-🔗 Official Website / Apply Link
+Official Website / Apply Link
 </label>
 
 <input
 type="url"
 id="officialLink"
 placeholder="https://example.com">
-
 </div>
-
 
 <div class="actions">
 
@@ -556,64 +327,33 @@ placeholder="https://example.com">
 type="button"
 class="btn btn-light"
 id="previewBtn">
-
 👁️ Preview
-
 </button>
-
 
 <button
 type="submit"
-class="btn btn-primary"
-id="saveBtn">
-
+class="btn btn-primary">
 💾 Save Post
-
-</button>
-
-
-<button
-type="button"
-class="btn btn-light"
-id="cancelEditBtn"
-style="display:none">
-
-❌ Cancel Edit
-
 </button>
 
 </div>
-
 
 </form>
 
-
-<div
-id="status"
-class="status">
-</div>
-
+<div id="status" class="status"></div>
 
 </section>
 
 
-<!-- =========================
-PREVIEW
-========================= -->
+<!-- PREVIEW -->
 
 <section class="card">
 
-<h2>
-👁️ Post Preview
-</h2>
+<h2>👁️ Post Preview</h2>
 
-<div
-id="previewBox"
-class="preview">
+<div id="previewBox" class="preview">
 
-<h3>
-এখানে Preview দেখা যাবে
-</h3>
+<h3>এখানে Preview দেখা যাবে</h3>
 
 <p class="meta">
 Post-এর তথ্য লিখে Preview চাপুন।
@@ -623,29 +363,18 @@ Post-এর তথ্য লিখে Preview চাপুন।
 
 </section>
 
-
 </div>
 
 
-<!-- =========================
-SAVED POSTS
-========================= -->
+<!-- SAVED POSTS -->
 
-<section
-class="card"
-style="margin-top:20px">
+<section class="card" style="margin-top:20px">
 
-<h2>
-📚 Saved Posts
-</h2>
+<h2>📚 Saved Posts</h2>
 
-<div
-id="postList"
-class="post-list">
-</div>
+<div id="postList" class="post-list"></div>
 
 </section>
-
 
 </main>
 
@@ -656,7 +385,7 @@ class="post-list">
 
 
 /* =========================
-LOGIN CHECK
+   LOGIN CHECK
 ========================= */
 
 const loggedIn =
@@ -670,7 +399,7 @@ window.location.href="admin.html";
 
 
 /* =========================
-ELEMENTS
+   ELEMENTS
 ========================= */
 
 const form =
@@ -687,30 +416,6 @@ document.getElementById("postDate");
 
 const description =
 document.getElementById("postDescription");
-
-const importantDates =
-document.getElementById("importantDates");
-
-const applicationFee =
-document.getElementById("applicationFee");
-
-const ageLimit =
-document.getElementById("ageLimit");
-
-const vacancyDetails =
-document.getElementById("vacancyDetails");
-
-const qualification =
-document.getElementById("qualification");
-
-const selectionProcess =
-document.getElementById("selectionProcess");
-
-const howToApply =
-document.getElementById("howToApply");
-
-const otherDetails =
-document.getElementById("otherDetails");
 
 const officialLink =
 document.getElementById("officialLink");
@@ -730,15 +435,9 @@ document.getElementById("postList");
 const logoutBtn =
 document.getElementById("logoutBtn");
 
-const saveBtn =
-document.getElementById("saveBtn");
-
-const cancelEditBtn =
-document.getElementById("cancelEditBtn");
-
 
 /* =========================
-DEFAULT DATE
+   DEFAULT DATE
 ========================= */
 
 const today =
@@ -748,14 +447,7 @@ date.value=today;
 
 
 /* =========================
-EDIT MODE
-========================= */
-
-let editingId=null;
-
-
-/* =========================
-STORAGE
+   STORAGE
 ========================= */
 
 function getPosts(){
@@ -786,38 +478,7 @@ JSON.stringify(posts)
 
 
 /* =========================
-PREVIEW SECTION
-========================= */
-
-function makeSection(titleText,value){
-
-if(!value){
-
-return "";
-
-}
-
-return `
-
-<div class="preview-section">
-
-<h4>
-${escapeHTML(titleText)}
-</h4>
-
-<p>
-${formatText(value)}
-</p>
-
-</div>
-
-`;
-
-}
-
-
-/* =========================
-PREVIEW
+   PREVIEW
 ========================= */
 
 function showPreview(){
@@ -850,6 +511,7 @@ return;
 
 previewBox.innerHTML=`
 
+<div>
 <span style="
 background:#eef5ff;
 color:#0b63ce;
@@ -858,104 +520,33 @@ border-radius:20px;
 font-size:11px;
 font-weight:700;
 ">
-
-${escapeHTML(categoryValue || "Category")}
-
+${categoryValue || "Category"}
 </span>
 
-
-<h3>
-${escapeHTML(titleValue)}
-</h3>
-
+<h3>${escapeHTML(titleValue)}</h3>
 
 <p>
-${formatText(descriptionValue)}
+${escapeHTML(descriptionValue)}
 </p>
-
 
 <p class="meta">
-
-প্রকাশিত:
-${escapeHTML(dateValue || "Date")}
-
+প্রকাশিত: ${dateValue || "Date"}
 </p>
-
-
-${makeSection(
-"📅 Important Dates",
-importantDates.value.trim()
-)}
-
-
-${makeSection(
-"💰 Application Fee",
-applicationFee.value.trim()
-)}
-
-
-${makeSection(
-"🎂 Age Limit",
-ageLimit.value.trim()
-)}
-
-
-${makeSection(
-"📊 Vacancy Details",
-vacancyDetails.value.trim()
-)}
-
-
-${makeSection(
-"🎓 Educational Qualification",
-qualification.value.trim()
-)}
-
-
-${makeSection(
-"📝 Selection Process",
-selectionProcess.value.trim()
-)}
-
-
-${makeSection(
-"💻 How to Apply",
-howToApply.value.trim()
-)}
-
-
-${makeSection(
-"📌 Other Important Details",
-otherDetails.value.trim()
-)}
-
 
 ${
 linkValue
 ?
-`
-
-<div class="preview-section">
-
-<h4>
-🔗 Important Link
-</h4>
-
-<a
+`<a
 href="${escapeAttribute(linkValue)}"
 target="_blank"
 rel="noopener"
 class="btn btn-primary">
-
-Official Website / Apply Online
-
-</a>
-
-</div>
-
-`
+Official Website
+</a>`
 :""
 }
+
+</div>
 
 `;
 
@@ -963,7 +554,7 @@ Official Website / Apply Online
 
 
 /* =========================
-SAVE / UPDATE POST
+   SAVE POST
 ========================= */
 
 form.addEventListener(
@@ -973,7 +564,9 @@ function(event){
 event.preventDefault();
 
 
-const postData={
+const post={
+
+id:Date.now(),
 
 title:title.value.trim(),
 
@@ -983,268 +576,45 @@ date:date.value,
 
 description:description.value.trim(),
 
-importantDates:importantDates.value.trim(),
-
-applicationFee:applicationFee.value.trim(),
-
-ageLimit:ageLimit.value.trim(),
-
-vacancyDetails:vacancyDetails.value.trim(),
-
-qualification:qualification.value.trim(),
-
-selectionProcess:selectionProcess.value.trim(),
-
-howToApply:howToApply.value.trim(),
-
-otherDetails:otherDetails.value.trim(),
-
 officialLink:officialLink.value.trim()
 
 };
 
 
-let posts=getPosts();
-
-
-/* UPDATE */
-
-if(editingId!==null){
-
-posts=posts.map(function(post){
-
-if(post.id===editingId){
-
-return {
-
-...post,
-
-...postData
-
-};
-
-}
-
-return post;
-
-});
-
-
-savePosts(posts);
-
-showStatus(
-"✅ Post সফলভাবে Update হয়েছে।",
-"success"
-);
-
-}
-
-
-/* NEW POST */
-
-else{
-
-const post={
-
-id:Date.now(),
-
-...postData
-
-};
-
+const posts=getPosts();
 
 posts.unshift(post);
 
 savePosts(posts);
 
-showStatus(
-"✅ Post সফলভাবে Save হয়েছে।",
-"success"
-);
-
-}
-
-
 renderPosts();
 
-resetForm();
 
-}
-);
-
-
-/* =========================
-STATUS
-========================= */
-
-function showStatus(message,type){
-
-statusBox.textContent=message;
+statusBox.textContent=
+"✅ Post সফলভাবে Save হয়েছে।";
 
 statusBox.className=
-"status "+type;
+"status success";
 
-setTimeout(function(){
-
-statusBox.className="status";
-
-},3000);
-
-}
-
-
-/* =========================
-RESET FORM
-========================= */
-
-function resetForm(){
 
 form.reset();
 
 date.value=today;
 
-editingId=null;
-
-saveBtn.textContent=
-"💾 Save Post";
-
-cancelEditBtn.style.display=
-"none";
-
 previewBox.innerHTML=
+"<h3>Post Save হয়েছে</h3><p class='meta'>নতুন Post তৈরি করতে আবার তথ্য লিখুন।</p>";
 
-"<h3>নতুন Post তৈরি করুন</h3>" +
+setTimeout(function(){
 
-"<p class='meta'>তথ্য লিখে Preview চাপুন।</p>";
+statusBox.style.display="none";
 
-}
-
-
-/* =========================
-EDIT POST
-========================= */
-
-window.editPost=function(id){
-
-const posts=getPosts();
-
-const post=
-posts.find(function(item){
-
-return item.id===id;
+},3000);
 
 });
 
 
-if(!post){
-
-return;
-
-}
-
-
-editingId=post.id;
-
-
-title.value=post.title || "";
-
-category.value=post.category || "";
-
-date.value=post.date || today;
-
-description.value=
-post.description || "";
-
-importantDates.value=
-post.importantDates || "";
-
-applicationFee.value=
-post.applicationFee || "";
-
-ageLimit.value=
-post.ageLimit || "";
-
-vacancyDetails.value=
-post.vacancyDetails || "";
-
-qualification.value=
-post.qualification || "";
-
-selectionProcess.value=
-post.selectionProcess || "";
-
-howToApply.value=
-post.howToApply || "";
-
-otherDetails.value=
-post.otherDetails || "";
-
-officialLink.value=
-post.officialLink || "";
-
-
-saveBtn.textContent=
-"💾 Update Post";
-
-cancelEditBtn.style.display=
-"inline-block";
-
-
-showPreview();
-
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-};
-
-
 /* =========================
-DELETE POST
-========================= */
-
-window.deletePost=function(id){
-
-const confirmDelete=
-confirm(
-"এই Post-টি Delete করতে চান?"
-);
-
-
-if(!confirmDelete){
-
-return;
-
-}
-
-
-const posts=
-getPosts().filter(
-function(post){
-
-return post.id!==id;
-
-}
-);
-
-
-savePosts(posts);
-
-renderPosts();
-
-
-showStatus(
-"🗑️ Post Delete হয়েছে।",
-"success"
-);
-
-};
-
-
-/* =========================
-RENDER POSTS
+   RENDER POSTS
 ========================= */
 
 function renderPosts(){
@@ -1273,47 +643,23 @@ return `
 ${escapeHTML(post.title)}
 </h3>
 
-
 <div class="meta">
-
-${escapeHTML(post.category || "")}
-
+${escapeHTML(post.category)}
 •
-
-${escapeHTML(post.date || "")}
-
+${escapeHTML(post.date)}
 </div>
 
-
 <p>
-
-${escapeHTML(
-post.description || ""
-)}
-
+${escapeHTML(post.description)}
 </p>
 
-
 <div class="actions">
-
-
-<button
-class="btn btn-edit"
-onclick="editPost(${post.id})">
-
-✏️ Edit
-
-</button>
-
 
 <button
 class="btn btn-danger"
 onclick="deletePost(${post.id})">
-
 🗑️ Delete
-
 </button>
-
 
 </div>
 
@@ -1327,31 +673,37 @@ onclick="deletePost(${post.id})">
 
 
 /* =========================
-FORMAT TEXT
+   DELETE POST
 ========================= */
 
-function formatText(value){
+window.deletePost=function(id){
 
-if(!value){
+const confirmDelete =
+confirm("এই Post-টি Delete করতে চান?");
 
-return "";
+if(!confirmDelete){
 
-}
-
-
-/*
-একাধিক line থাকলে
-line break দেখাবে
-*/
-
-return escapeHTML(value)
-.replace(/\n/g,"<br>");
+return;
 
 }
+
+
+const posts=
+getPosts().filter(
+function(post){
+return post.id!==id;
+}
+);
+
+savePosts(posts);
+
+renderPosts();
+
+};
 
 
 /* =========================
-HTML SECURITY
+   HTML SECURITY
 ========================= */
 
 function escapeHTML(value){
@@ -1375,21 +727,17 @@ function escapeAttribute(value){
 
 return String(value)
 
-.replace(/&/g,"&amp;")
-
 .replace(/"/g,"&quot;")
 
 .replace(/</g,"&lt;")
 
-.replace(/>/g,"&gt;")
-
-.replace(/'/g,"&#039;");
+.replace(/>/g,"&gt;");
 
 }
 
 
 /* =========================
-PREVIEW BUTTON
+   PREVIEW BUTTON
 ========================= */
 
 previewBtn.addEventListener(
@@ -1399,21 +747,7 @@ showPreview
 
 
 /* =========================
-CANCEL EDIT
-========================= */
-
-cancelEditBtn.addEventListener(
-"click",
-function(){
-
-resetForm();
-
-}
-);
-
-
-/* =========================
-LOGOUT
+   LOGOUT
 ========================= */
 
 logoutBtn.addEventListener(
@@ -1426,12 +760,11 @@ sessionStorage.removeItem(
 
 window.location.href="admin.html";
 
-}
-);
+});
 
 
 /* =========================
-INITIAL LOAD
+   INITIAL LOAD
 ========================= */
 
 renderPosts();
