@@ -1,324 +1,452 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>WB Help Admin Login</title>
+<title>WB Help Admin Login</title>
 
-  <meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex,nofollow">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+*{
+box-sizing:border-box;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-    }
+html,body{
+margin:0;
+padding:0;
+min-height:100%;
+}
 
-    body {
-      min-height: 100vh;
-      font-family: Arial, "Noto Sans Bengali", sans-serif;
-      background: linear-gradient(135deg, #0b63ce, #0f9d8a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+body{
+min-height:100vh;
+font-family:Arial,"Noto Sans Bengali",sans-serif;
+background:linear-gradient(135deg,#0b63ce,#0f9d8a);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
 
-    .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
-    }
+.login-box{
+width:100%;
+max-width:420px;
+background:#fff;
+border-radius:20px;
+padding:30px;
+box-shadow:0 20px 50px rgba(0,0,0,.20);
+}
 
-    .logo {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 15px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #0b63ce, #0f9d8a);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: 800;
-    }
+.logo{
+width:64px;
+height:64px;
+margin:0 auto 15px;
+border-radius:16px;
+background:linear-gradient(135deg,#0b63ce,#0f9d8a);
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+font-weight:800;
+}
 
-    h1 {
-      text-align: center;
-      margin: 0;
-      color: #17324d;
-      font-size: 25px;
-    }
+h1{
+text-align:center;
+margin:0;
+color:#17324d;
+font-size:25px;
+}
 
-    .subtitle {
-      text-align: center;
-      color: #63758a;
-      font-size: 14px;
-      margin: 6px 0 25px;
-    }
+.subtitle{
+text-align:center;
+color:#63758a;
+font-size:14px;
+margin:6px 0 25px;
+}
 
-    .field {
-      margin-bottom: 17px;
-    }
+.field{
+margin-bottom:17px;
+}
 
-    .field label {
-      display: block;
-      margin-bottom: 7px;
-      color: #17324d;
-      font-size: 14px;
-      font-weight: 700;
-    }
+.field label{
+display:block;
+margin-bottom:7px;
+color:#17324d;
+font-size:14px;
+font-weight:700;
+}
 
-    .field input {
-      width: 100%;
-      height: 46px;
-      padding: 0 13px;
-      border: 1px solid #dce5ee;
-      border-radius: 11px;
-      outline: none;
-      background: #ffffff;
-      color: #17324d;
-      font-size: 15px;
-    }
+.field input{
+width:100%;
+height:46px;
+padding:0 13px;
+border:1px solid #dce5ee;
+border-radius:11px;
+outline:none;
+background:#fff;
+color:#17324d;
+font-size:15px;
+}
 
-    .field input:focus {
-      border-color: #0b63ce;
-      box-shadow: 0 0 0 3px rgba(11, 99, 206, 0.10);
-    }
+.field input:focus{
+border-color:#0b63ce;
+box-shadow:0 0 0 3px rgba(11,99,206,.10);
+}
 
-    .login-btn {
-      width: 100%;
-      height: 46px;
-      border: 0;
-      border-radius: 11px;
-      background: #0b63ce;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.login-btn{
+width:100%;
+height:46px;
+border:0;
+border-radius:11px;
+background:#0b63ce;
+color:#fff;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+}
 
-    .login-btn:hover {
-      background: #084b9d;
-    }
+.login-btn:disabled{
+opacity:.7;
+cursor:not-allowed;
+}
 
-    .login-btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
+.error{
+display:none;
+margin-top:15px;
+padding:11px;
+border-radius:9px;
+background:#fff0f0;
+color:#c62828;
+text-align:center;
+font-size:13px;
+line-height:1.5;
+}
 
-    .error {
-      display: none;
-      margin-top: 15px;
-      padding: 11px;
-      border-radius: 9px;
-      background: #fff0f0;
-      color: #c62828;
-      text-align: center;
-      font-size: 13px;
-    }
+.back{
+display:block;
+margin-top:20px;
+text-align:center;
+color:#0b63ce;
+text-decoration:none;
+font-size:13px;
+}
 
-    .back {
-      display: block;
-      margin-top: 20px;
-      text-align: center;
-      color: #0b63ce;
-      text-decoration: none;
-      font-size: 13px;
-    }
+.warning{
+margin-top:20px;
+padding:11px;
+border-radius:9px;
+background:#fff8e6;
+color:#795500;
+font-size:11px;
+line-height:1.5;
+text-align:center;
+}
 
-    .back:hover {
-      text-decoration: underline;
-    }
+@media(max-width:480px){
 
-    .warning {
-      margin-top: 20px;
-      padding: 11px;
-      border-radius: 9px;
-      background: #fff8e6;
-      color: #795500;
-      font-size: 11px;
-      line-height: 1.5;
-      text-align: center;
-    }
+body{
+padding:15px;
+}
 
-    @media (max-width: 480px) {
-      body {
-        padding: 15px;
-      }
+.login-box{
+padding:25px 20px;
+}
 
-      .login-box {
-        padding: 25px 20px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <main class="login-box">
+<main class="login-box">
 
-    <div class="logo">WB</div>
+<div class="logo">WB</div>
 
-    <h1>WB Help Admin</h1>
+<h1>WB Help Admin</h1>
 
-    <div class="subtitle">
-      Admin Panel Login
-    </div>
+<div class="subtitle">
+Admin Panel Login
+</div>
 
-    <form id="loginForm" autocomplete="on">
+<form id="loginForm">
 
-      <div class="field">
-        <label for="username">Username</label>
+<div class="field">
 
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Enter username"
-          autocomplete="username"
-          required
-        >
-      </div>
+<label for="username">
+Username
+</label>
 
-      <div class="field">
-        <label for="password">Password</label>
+<input
+type="text"
+id="username"
+name="username"
+placeholder="Enter username"
+autocomplete="username"
+required>
 
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter password"
-          autocomplete="current-password"
-          required
-        >
-      </div>
+</div>
 
-      <button type="submit" class="login-btn">
-        🔐 Login
-      </button>
 
-    </form>
+<div class="field">
 
-    <div id="errorMessage" class="error" role="alert">
-      Username অথবা Password ভুল।
-    </div>
+<label for="password">
+Password
+</label>
 
-    <a href="index.html" class="back">
-      ← Back to WB Help
-    </a>
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Enter password"
+autocomplete="current-password"
+required>
 
-    <div class="warning">
-      এটি বর্তমানে demo login system।
-      GitHub Pages-এর static website-এ password নিরাপদভাবে
-      সংরক্ষণ করা যায় না। Final version-এ secure authentication
-      ব্যবহার করা হবে।
-    </div>
+</div>
 
-  </main>
+
+<button
+type="submit"
+class="login-btn">
+
+🔐 Login
+
+</button>
+
+</form>
+
+
+<div
+id="errorMessage"
+class="error"
+role="alert">
+</div>
+
+
+<a
+href="index.html"
+class="back">
+
+← Back to WB Help
+
+</a>
+
+
+<div class="warning">
+
+Admin panel-এর login Cloudflare Worker-এর মাধ্যমে
+পরিচালিত হচ্ছে।
+
+</div>
+
+</main>
+
 
 <script>
+
 "use strict";
-/* নতুন Cloudflare Worker URL */
-const API_URL = "https://wbhelp-admin-server.mahatosumanapd.workers.dev";
-document.addEventListener("DOMContentLoaded", function () {
-  const loginForm = document.getElementById("loginForm");
-  const usernameInput = document.getElementById("username");
-  const passwordInput = document.getElementById("password");
-  const errorMessage = document.getElementById("errorMessage");
-  if (!loginForm) return;
- loginForm.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value;
 
-    errorMessage.style.display = "none";
 
-    const button = loginForm.querySelector(".login-btn");
+/* =========================
+   CLOUDFLARE WORKER
+========================= */
 
-    button.disabled = true;
-    button.textContent = "⏳ Login হচ্ছে...";
+const API_URL =
+"https://wbhelp-admin-server.mahatosumanapd.workers.dev";
 
-    try {
 
-      const response = await fetch(
-        API_URL + "/api/login",
-        {
-          method: "POST",
+/* =========================
+   ELEMENTS
+========================= */
 
-          headers: {
-            "Content-Type": "application/json"
-          },
+const loginForm =
+document.getElementById("loginForm");
 
-          body: JSON.stringify({
-            username: username,
-            password: password
-          })
-        }
-      );
+const usernameInput =
+document.getElementById("username");
 
-      const data = await response.json();
+const passwordInput =
+document.getElementById("password");
 
-      if (response.ok && data.success) {
+const errorMessage =
+document.getElementById("errorMessage");
 
-        sessionStorage.setItem(
-          "wbhelp_admin_login",
-          "true"
-        );
+const loginButton =
+loginForm.querySelector(".login-btn");
 
-        /* Login সফল হলে token সংরক্ষণ */
-        if (data.token) {
-          sessionStorage.setItem(
-            "wbhelp_admin_token",
-            data.token
-          );
-        }
 
-        window.location.href =
-          "admin-dashboard.html";
+/* =========================
+   LOGIN
+========================= */
 
-      } else {
+loginForm.addEventListener(
+"submit",
+async function(event){
 
-        errorMessage.textContent =
-          data.message ||
-          "Username অথবা Password ভুল।";
+event.preventDefault();
 
-        errorMessage.style.display = "block";
 
-        passwordInput.value = "";
-        passwordInput.focus();
-      }
+const username =
+usernameInput.value.trim();
 
-    } catch (error) {
+const password =
+passwordInput.value;
 
-      console.error("Login Error:", error);
 
-      errorMessage.textContent =
-        "Server-এর সঙ্গে যোগাযোগ করা যাচ্ছে না।";
+errorMessage.style.display="none";
 
-      errorMessage.style.display = "block";
+loginButton.disabled=true;
 
-    } finally {
+loginButton.textContent=
+"⏳ Login হচ্ছে...";
 
-      button.disabled = false;
-      button.textContent = "🔐 Login";
-    }
 
-  });
+try{
+
+const response =
+await fetch(
+API_URL + "/api/login",
+{
+method:"POST",
+
+headers:{
+"Content-Type":"application/json",
+"Accept":"application/json"
+},
+
+body:JSON.stringify({
+username:username,
+password:password
+})
+}
+);
+
+
+/* =========================
+   RESPONSE TEXT
+========================= */
+
+const responseText =
+await response.text();
+
+console.log(
+"Login status:",
+response.status
+);
+
+console.log(
+"Login response:",
+responseText
+);
+
+
+let data={};
+
+
+try{
+
+data=
+JSON.parse(responseText);
+
+}catch(parseError){
+
+data={
+message:responseText
+};
+
+}
+
+
+/* =========================
+   LOGIN SUCCESS
+========================= */
+
+if(
+response.ok &&
+data.success
+){
+
+sessionStorage.setItem(
+"wbhelp_admin_login",
+"true"
+);
+
+
+if(data.token){
+
+sessionStorage.setItem(
+"wbhelp_admin_token",
+data.token
+);
+
+}
+
+
+window.location.href=
+"admin-dashboard.html";
+
+return;
+
+}
+
+
+/* =========================
+   LOGIN FAILED
+========================= */
+
+errorMessage.textContent=
+data.message ||
+"Username অথবা Password ভুল।";
+
+
+errorMessage.style.display=
+"block";
+
+
+passwordInput.value="";
+
+passwordInput.focus();
+
+
+}
+
+
+/* =========================
+   SERVER ERROR
+========================= */
+
+catch(error){
+
+console.error(
+"LOGIN ERROR:",
+error
+);
+
+
+errorMessage.textContent=
+"Server-এর সঙ্গে যোগাযোগ করা যাচ্ছে না। আবার চেষ্টা করুন।";
+
+
+errorMessage.style.display=
+"block";
+
+}
+
+
+finally{
+
+loginButton.disabled=false;
+
+loginButton.textContent=
+"🔐 Login";
+
+}
 
 });
+
+
 </script>
 
 </body>
 </html>
-```
