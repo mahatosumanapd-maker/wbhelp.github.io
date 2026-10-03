@@ -316,18 +316,12 @@ Logout
 <div class="grid">
 
 
-<!-- =========================
-     CREATE POST
-========================= -->
-
 <section class="card">
 
 <h2>📝 Create New Post</h2>
 
 <form id="postForm">
 
-
-<!-- BASIC INFORMATION -->
 
 <div class="section-title">
 📌 Basic Information
@@ -418,8 +412,6 @@ required></textarea>
 </div>
 
 
-<!-- IMPORTANT DETAILS -->
-
 <div class="section-title">
 📋 Important Details
 </div>
@@ -501,8 +493,6 @@ placeholder="যেমন:
 </div>
 
 
-<!-- SELECTION -->
-
 <div class="section-title">
 📝 Selection & Application
 </div>
@@ -557,8 +547,6 @@ placeholder="অন্য গুরুত্বপূর্ণ তথ্য এ�
 </div>
 
 
-<!-- LINK -->
-
 <div class="section-title">
 🔗 Official Link
 </div>
@@ -581,8 +569,6 @@ Official website অথবা Apply Online-এর link দিন।
 
 </div>
 
-
-<!-- BUTTONS -->
 
 <div class="actions">
 
@@ -624,10 +610,6 @@ class="status">
 </section>
 
 
-<!-- =========================
-     PREVIEW
-========================= -->
-
 <section class="card">
 
 <h2>👁️ Post Preview</h2>
@@ -651,10 +633,6 @@ Post-এর তথ্য লিখে Preview চাপুন।
 </div>
 
 
-<!-- =========================
-     SAVED POSTS
-========================= -->
-
 <section
 class="card"
 style="margin-top:20px">
@@ -677,6 +655,14 @@ class="post-list">
 
 
 /* =========================
+   API
+========================= */
+
+const API_URL =
+"https://wbhelp-admin-server.mahatosumanapd.workers.dev";
+
+
+/* =========================
    LOGIN CHECK
 ========================= */
 
@@ -690,6 +676,16 @@ if(loggedIn !== "true"){
 window.location.href="admin.html";
 
 }
+
+
+/* =========================
+   API TOKEN
+========================= */
+
+const adminToken =
+sessionStorage.getItem(
+"wbhelp_admin_token"
+);
 
 
 /* =========================
@@ -804,34 +800,42 @@ date.value=today;
 
 
 /* =========================
-   STORAGE
+   API HEADERS
 ========================= */
 
-function getPosts(){
+function authHeaders(){
 
-try{
+return {
 
-return JSON.parse(
-localStorage.getItem(
-"wbhelp_posts"
-) || "[]"
-);
+"Content-Type":
+"application/json",
 
-}catch(error){
+"Accept":
+"application/json",
 
-return [];
+"Authorization":
+"Bearer " + adminToken
+
+};
 
 }
 
-}
 
+/* =========================
+   STATUS
+========================= */
 
-function savePosts(posts){
+function showStatus(
+message,
+type="success"
+){
 
-localStorage.setItem(
-"wbhelp_posts",
-JSON.stringify(posts)
-);
+statusBox.textContent=message;
+
+statusBox.className =
+"status " + type;
+
+statusBox.style.display="block";
 
 }
 
@@ -1052,22 +1056,90 @@ previewBox.innerHTML=
 
 
 /* =========================
+   GET POSTS FROM WORKER
+========================= */
+
+async function loadPosts(){
+
+try{
+
+postList.innerHTML =
+'<div class="empty">Post load হচ্ছে...</div>';
+
+
+const response =
+await fetch(
+API_URL + "/api/posts"
+);
+
+
+const data =
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message || "Post load failed"
+);
+
+}
+
+
+if(!data.success){
+
+throw new Error(
+data.message || "Post load failed"
+);
+
+}
+
+
+renderPosts(
+data.posts || []
+);
+
+
+}catch(error){
+
+console.error(error);
+
+postList.innerHTML = `
+<div class="empty">
+❌ Post load করা যাচ্ছে না।<br><br>
+${escapeHTML(error.message)}
+</div>
+`;
+
+}
+
+}
+
+
+/* =========================
    SAVE / UPDATE POST
 ========================= */
 
 form.addEventListener(
 "submit",
-function(event){
+async function(event){
 
 event.preventDefault();
 
 
-const post = {
+if(!adminToken){
 
-id:
-editingPostId !== null
-? editingPostId
-: Date.now(),
+showStatus(
+"❌ Login token পাওয়া যায়নি। আবার Login করুন।",
+"error"
+);
+
+return;
+
+}
+
+
+const post = {
 
 title:
 title.value.trim(),
@@ -1111,62 +1183,113 @@ officialLink.value.trim()
 };
 
 
-const posts =
-getPosts();
+try{
+
+saveBtn.disabled=true;
+
+saveBtn.textContent =
+editingPostId !== null
+? "Updating..."
+: "Saving...";
+
+
+let response;
 
 
 if(editingPostId !== null){
 
-const index =
-posts.findIndex(
-function(item){
-
-return item.id === editingPostId;
-
+response =
+await fetch(
+API_URL +
+"/api/posts/" +
+encodeURIComponent(editingPostId),
+{
+method:"PUT",
+headers:authHeaders(),
+body:JSON.stringify(post)
 }
 );
 
+}else{
 
-if(index !== -1){
-
-posts[index]=post;
+response =
+await fetch(
+API_URL + "/api/posts",
+{
+method:"POST",
+headers:authHeaders(),
+body:JSON.stringify(post)
+}
+);
 
 }
 
-statusBox.textContent=
-"✅ Post সফলভাবে Update হয়েছে।";
+
+const data =
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message ||
+"Server error"
+);
+
+}
+
+
+if(!data.success){
+
+throw new Error(
+data.message ||
+"Post save failed"
+);
+
+}
+
+
+if(editingPostId !== null){
+
+showStatus(
+"✅ Post সফলভাবে Update হয়েছে।"
+);
 
 }else{
 
-posts.unshift(post);
-
-statusBox.textContent=
-"✅ Post সফলভাবে Save হয়েছে।";
+showStatus(
+"✅ Post সফলভাবে Cloudflare KV-তে Save হয়েছে।"
+);
 
 }
-
-
-savePosts(posts);
-
-renderPosts();
-
-
-statusBox.className=
-"status success";
 
 
 resetForm();
 
+await loadPosts();
 
-setTimeout(
-function(){
 
-statusBox.style.display=
-"none";
+}catch(error){
 
-},
-3000
+console.error(error);
+
+showStatus(
+"❌ " + error.message,
+"error"
 );
+
+}finally{
+
+saveBtn.disabled=false;
+
+if(editingPostId === null){
+
+saveBtn.textContent =
+"💾 Save Post";
+
+}
+
+}
 
 });
 
@@ -1175,15 +1298,11 @@ statusBox.style.display=
    RENDER POSTS
 ========================= */
 
-function renderPosts(){
-
-const posts =
-getPosts();
-
+function renderPosts(posts){
 
 if(!posts.length){
 
-postList.innerHTML=
+postList.innerHTML =
 '<div class="empty">এখনও কোনও Post Save করা হয়নি।</div>';
 
 return;
@@ -1210,7 +1329,7 @@ post.category || "Category"
 
 <h3>
 ${escapeHTML(
-post.title
+post.title || ""
 )}
 </h3>
 
@@ -1260,6 +1379,24 @@ post.vacancyDetails
 }
 
 ${
+post.educationalQualification
+? "🎓 Qualification • "
+: ""
+}
+
+${
+post.selectionProcess
+? "📋 Selection • "
+: ""
+}
+
+${
+post.howToApply
+? "🖥️ Apply • "
+: ""
+}
+
+${
 post.officialLink
 ? "🔗 Official Link"
 : ""
@@ -1273,7 +1410,7 @@ post.officialLink
 
 <button
 class="btn btn-edit"
-onclick="editPost(${post.id})">
+onclick="editPost('${escapeAttribute(String(post.id))}')">
 
 ✏️ Edit
 
@@ -1282,7 +1419,7 @@ onclick="editPost(${post.id})">
 
 <button
 class="btn btn-danger"
-onclick="deletePost(${post.id})">
+onclick="deletePost('${escapeAttribute(String(post.id))}')">
 
 🗑️ Delete
 
@@ -1306,23 +1443,45 @@ onclick="deletePost(${post.id})">
 ========================= */
 
 window.editPost =
-function(id){
+async function(id){
 
-const posts =
-getPosts();
+try{
+
+const response =
+await fetch(
+API_URL + "/api/posts"
+);
+
+
+const data =
+await response.json();
+
+
+if(!response.ok){
+
+throw new Error(
+data.message || "Post load failed"
+);
+
+}
 
 
 const post =
-posts.find(
+(data.posts || []).find(
 function(item){
 
-return item.id === id;
+return String(item.id) === String(id);
 
 }
 );
 
 
 if(!post){
+
+showStatus(
+"❌ Post পাওয়া যায়নি।",
+"error"
+);
 
 return;
 
@@ -1390,6 +1549,18 @@ behavior:"smooth"
 
 });
 
+
+}catch(error){
+
+console.error(error);
+
+showStatus(
+"❌ " + error.message,
+"error"
+);
+
+}
+
 };
 
 
@@ -1412,7 +1583,7 @@ resetForm();
 ========================= */
 
 window.deletePost =
-function(id){
+async function(id){
 
 const confirmDelete =
 confirm(
@@ -1427,19 +1598,62 @@ return;
 }
 
 
-const posts =
-getPosts().filter(
-function(post){
+try{
 
-return post.id !== id;
-
+const response =
+await fetch(
+API_URL +
+"/api/posts/" +
+encodeURIComponent(id),
+{
+method:"DELETE",
+headers:authHeaders()
 }
 );
 
 
-savePosts(posts);
+const data =
+await response.json();
 
-renderPosts();
+
+if(!response.ok){
+
+throw new Error(
+data.message ||
+"Delete failed"
+);
+
+}
+
+
+if(!data.success){
+
+throw new Error(
+data.message ||
+"Delete failed"
+);
+
+}
+
+
+showStatus(
+"✅ Post সফলভাবে Delete হয়েছে।"
+);
+
+
+await loadPosts();
+
+
+}catch(error){
+
+console.error(error);
+
+showStatus(
+"❌ " + error.message,
+"error"
+);
+
+}
 
 };
 
@@ -1538,7 +1752,7 @@ window.location.href=
    INITIAL LOAD
 ========================= */
 
-renderPosts();
+loadPosts();
 
 </script>
 
