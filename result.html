@@ -1,1 +1,862 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Results – WB Help</title><meta name="description" content="West Bengal results, merit lists and answer key information in Bengali. Sample content included."><link rel="canonical" href="https://wbhelp.github.io/result.html"><link rel="stylesheet" href="css/style.css"><script defer src="js/script.js"></script></head><body><header class="header"><div class="container nav-wrap"><a class="brand" href="index.html"><span class="logo">WB</span><span><span class="brand-title">WB Help</span><span class="brand-tag">সরকারি পরিষেবা এখন সহজ বাংলায়</span></span></a><nav id="siteNav" class="nav"><a href="index.html">Home</a><a href="jobs.html">Jobs</a><a href="admit-card.html">Admit Card</a><a class="active" href="result.html">Result</a><a href="schemes.html">Government Schemes</a><a href="services.html">Government Services</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">◐</button><button id="menuToggle" class="menu-btn" aria-label="Open menu">☰</button></div></div></header><main><section class="page-head"><div class="container"><div class="breadcrumbs"><a href="index.html">Home</a> / Result</div><h1>Result</h1><p class="meta">নমুনা ফলাফল তালিকা।</p></div></section><section class="section"><div class="container"><div class="grid-3"><article class="result-card card"><span class="tag">Sample</span><h3>Sample Result Update 2026</h3><p>অফিসিয়াল ফলাফল প্রকাশের পরে সঠিক তথ্য যুক্ত করুন।</p><a class="btn btn-primary" href="posts/sample-result.html">Details</a></article><article class="result-card card"><span class="tag">Sample</span><h3>Sample Merit List</h3><p>নমুনা মেরিট লিস্ট।</p><a class="btn btn-primary" href="posts/sample-result.html">Details</a></article><article class="result-card card"><span class="tag">Sample</span><h3>Sample Answer Key</h3><p>নমুনা উত্তরপত্র।</p><a class="btn btn-primary" href="posts/sample-result.html">Details</a></article></div></div></section></main><footer class="footer"><div class="container"><div class="copy">© 2026 WB Help. <a href="privacy.html">Privacy Policy</a> · <a href="disclaimer.html">Disclaimer</a></div></div></footer></body></html>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Results – WB Help</title>
+
+<meta name="description" content="West Bengal Results, Merit List এবং Answer Key সংক্রান্ত সর্বশেষ তথ্য বাংলায়।">
+
+<link rel="canonical" href="https://wbhelp.github.io/result.html">
+
+<link rel="stylesheet" href="css/style.css">
+<script defer src="js/script.js"></script>
+
+<style>
+.dynamic-card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+
+.dynamic-card h3{
+  margin:10px 0;
+}
+
+.dynamic-card p{
+  line-height:1.6;
+}
+
+.post-date{
+  font-size:13px;
+  opacity:.75;
+  margin-bottom:8px;
+}
+
+.card-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:auto;
+  padding-top:15px;
+}
+
+.share-btn{
+  border:1px solid #ddd;
+  background:transparent;
+  padding:7px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.share-btn:hover{
+  opacity:.8;
+}
+
+.loading-box,
+.empty-box,
+.error-box{
+  text-align:center;
+  padding:30px 15px;
+  grid-column:1/-1;
+}
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  z-index:9999;
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.post-modal{
+  background:var(--card-bg,#fff);
+  color:inherit;
+  width:100%;
+  max-width:800px;
+  max-height:90vh;
+  overflow-y:auto;
+  border-radius:12px;
+  padding:22px;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  right:12px;
+  top:10px;
+  border:0;
+  background:transparent;
+  font-size:28px;
+  cursor:pointer;
+}
+
+.modal-content h2{
+  margin-top:5px;
+  padding-right:35px;
+}
+
+.detail-row{
+  margin:14px 0;
+  line-height:1.7;
+}
+
+.detail-row strong{
+  display:block;
+  margin-bottom:3px;
+}
+
+.modal-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav-wrap">
+
+    <a class="brand" href="index.html">
+      <span class="logo">WB</span>
+      <span>
+        <span class="brand-title">WB Help</span>
+        <span class="brand-tag">সরকারি পরিষেবা এখন সহজ বাংলায়</span>
+      </span>
+    </a>
+
+    <nav id="siteNav" class="nav">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="admit-card.html">Admit Card</a>
+      <a class="active" href="result.html">Result</a>
+      <a href="schemes.html">Government Schemes</a>
+      <a href="services.html">Government Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">◐</button>
+      <button id="menuToggle" class="menu-btn" aria-label="Open menu">☰</button>
+    </div>
+
+  </div>
+</header>
+
+
+<main>
+
+<section class="page-head">
+  <div class="container">
+
+    <div class="breadcrumbs">
+      <a href="index.html">Home</a> / Result
+    </div>
+
+    <h1>Result</h1>
+
+    <p class="meta">
+      বিভিন্ন পরীক্ষা, Merit List এবং Answer Key সংক্রান্ত সর্বশেষ আপডেট।
+    </p>
+
+  </div>
+</section>
+
+
+<section class="section">
+
+  <div class="container">
+
+    <div id="resultGrid" class="grid-3">
+
+      <div class="loading-box">
+        Result আপডেট লোড হচ্ছে...
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="copy">
+      © 2026 WB Help.
+      <a href="privacy.html">Privacy Policy</a> ·
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+
+  </div>
+</footer>
+
+
+<!-- POST DETAILS MODAL -->
+
+<div id="postModal" class="modal-overlay">
+
+  <div class="post-modal">
+
+    <button class="modal-close" onclick="closePostModal()">×</button>
+
+    <div id="modalContent" class="modal-content"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+  "https://wbhelp-admin-server.mahatosumanapd.workers.dev";
+
+const resultGrid =
+  document.getElementById("resultGrid");
+
+
+// ===============================
+// LOAD RESULT POSTS
+// ===============================
+
+async function loadResults(){
+
+  try{
+
+    const response =
+      await fetch(API_URL + "/api/posts");
+
+    if(!response.ok){
+      throw new Error("API error");
+    }
+
+    const data =
+      await response.json();
+
+    const posts =
+      Array.isArray(data.posts) ? data.posts : [];
+
+
+    // Result / Merit List / Answer Key category খোঁজা
+
+    let results =
+      posts.filter(post => {
+
+        const category =
+          String(post.category || "").toLowerCase();
+
+        return (
+          category.includes("result") ||
+          category.includes("merit") ||
+          category.includes("answer key") ||
+          category.includes("ফলাফল") ||
+          category.includes("মেরিট") ||
+          category.includes("উত্তর")
+        );
+
+      });
+
+
+    // Category না থাকলে title দেখে খোঁজা
+
+    if(results.length === 0){
+
+      results =
+        posts.filter(post => {
+
+          const title =
+            String(post.title || "").toLowerCase();
+
+          const description =
+            String(post.description || "").toLowerCase();
+
+          return (
+            title.includes("result") ||
+            title.includes("merit list") ||
+            title.includes("answer key") ||
+            title.includes("ফলাফল") ||
+            title.includes("মেরিট") ||
+            title.includes("answer") ||
+            description.includes("result") ||
+            description.includes("answer key")
+          );
+
+        });
+
+    }
+
+
+    if(results.length === 0){
+
+      resultGrid.innerHTML = `
+        <div class="empty-box card">
+
+          <h3>কোনও Result আপডেট পাওয়া যায়নি</h3>
+
+          <p>
+            Admin Panel থেকে Result category-তে
+            পোস্ট যোগ করলে এখানে automatically দেখা যাবে।
+          </p>
+
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    resultGrid.innerHTML =
+      results.map(post => createResultCard(post)).join("");
+
+
+  }catch(error){
+
+    console.error(error);
+
+    resultGrid.innerHTML = `
+      <div class="error-box card">
+
+        <h3>Result লোড করা যাচ্ছে না</h3>
+
+        <p>
+          কিছুক্ষণ পরে আবার চেষ্টা করুন।
+        </p>
+
+      </div>
+    `;
+
+  }
+
+}
+
+
+// ===============================
+// CREATE RESULT CARD
+// ===============================
+
+function createResultCard(post){
+
+  const id =
+    String(post.id || "");
+
+  const title =
+    escapeHTML(post.title || "Result Update");
+
+  const description =
+    escapeHTML(post.description || "");
+
+  const category =
+    escapeHTML(post.category || "Result");
+
+  const date =
+    escapeHTML(post.date || "");
+
+
+  const postUrl =
+    window.location.origin +
+    window.location.pathname +
+    "?post=" +
+    encodeURIComponent(id);
+
+
+  return `
+
+    <article class="result-card card dynamic-card">
+
+      <span class="tag">
+        ${category}
+      </span>
+
+      <h3>
+        ${title}
+      </h3>
+
+      <div class="post-date">
+        প্রকাশিত: ${date}
+      </div>
+
+      <p>
+        ${description.substring(0,180)}
+        ${description.length > 180 ? "..." : ""}
+      </p>
+
+
+      <div class="card-actions">
+
+        <button
+          class="btn btn-primary"
+          onclick="openPostModal('${escapeAttribute(id)}')">
+          Details
+        </button>
+
+
+        ${
+          post.officialLink
+          ?
+          `
+          <a
+            class="btn btn-primary"
+            href="${escapeAttribute(post.officialLink)}"
+            target="_blank"
+            rel="noopener">
+            Official Link
+          </a>
+          `
+          :
+          ""
+        }
+
+
+        <button
+          class="share-btn"
+          onclick="shareWhatsApp('${escapeAttribute(postUrl)}','${escapeAttribute(title)}')">
+          WhatsApp
+        </button>
+
+        <button
+          class="share-btn"
+          onclick="shareFacebook('${escapeAttribute(postUrl)}')">
+          Facebook
+        </button>
+
+        <button
+          class="share-btn"
+          onclick="shareTelegram('${escapeAttribute(postUrl)}','${escapeAttribute(title)}')">
+          Telegram
+        </button>
+
+        <button
+          class="share-btn"
+          onclick="copyPostLink('${escapeAttribute(postUrl)}')">
+          Copy Link
+        </button>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+// ===============================
+// OPEN POST MODAL
+// ===============================
+
+async function openPostModal(id){
+
+  try{
+
+    const response =
+      await fetch(API_URL + "/api/posts");
+
+    const data =
+      await response.json();
+
+    const posts =
+      Array.isArray(data.posts) ? data.posts : [];
+
+    const post =
+      posts.find(
+        item => String(item.id) === String(id)
+      );
+
+
+    if(!post){
+
+      alert("Post পাওয়া যায়নি।");
+      return;
+
+    }
+
+
+    const officialButton =
+      post.officialLink
+      ?
+      `
+      <a
+        class="btn btn-primary"
+        href="${escapeAttribute(post.officialLink)}"
+        target="_blank"
+        rel="noopener">
+        Official Website / Result Link
+      </a>
+      `
+      :
+      "";
+
+
+    document.getElementById("modalContent").innerHTML = `
+
+      <span class="tag">
+        ${escapeHTML(post.category || "Result")}
+      </span>
+
+      <h2>
+        ${escapeHTML(post.title || "")}
+      </h2>
+
+      ${
+        post.date
+        ?
+        `<div class="post-date">
+          প্রকাশিত: ${escapeHTML(post.date)}
+        </div>`
+        :
+        ""
+      }
+
+
+      ${
+        post.description
+        ?
+        `
+        <div class="detail-row">
+          <strong>বিস্তারিত:</strong>
+          ${formatText(post.description)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.importantDates
+        ?
+        `
+        <div class="detail-row">
+          <strong>গুরুত্বপূর্ণ তারিখ:</strong>
+          ${formatText(post.importantDates)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.applicationFee
+        ?
+        `
+        <div class="detail-row">
+          <strong>আবেদন ফি:</strong>
+          ${formatText(post.applicationFee)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.ageLimit
+        ?
+        `
+        <div class="detail-row">
+          <strong>বয়সসীমা:</strong>
+          ${formatText(post.ageLimit)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.vacancyDetails
+        ?
+        `
+        <div class="detail-row">
+          <strong>পদ / Vacancy:</strong>
+          ${formatText(post.vacancyDetails)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.educationalQualification
+        ?
+        `
+        <div class="detail-row">
+          <strong>শিক্ষাগত যোগ্যতা:</strong>
+          ${formatText(post.educationalQualification)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.selectionProcess
+        ?
+        `
+        <div class="detail-row">
+          <strong>নির্বাচন প্রক্রিয়া:</strong>
+          ${formatText(post.selectionProcess)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.howToApply
+        ?
+        `
+        <div class="detail-row">
+          <strong>কীভাবে Result / Answer Key দেখবেন:</strong>
+          ${formatText(post.howToApply)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      ${
+        post.otherDetails
+        ?
+        `
+        <div class="detail-row">
+          <strong>অন্যান্য তথ্য:</strong>
+          ${formatText(post.otherDetails)}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+      <div class="modal-buttons">
+
+        ${officialButton}
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById("postModal")
+      .classList.add("show");
+
+
+    const newUrl =
+      window.location.pathname +
+      "?post=" +
+      encodeURIComponent(id);
+
+    history.pushState({}, "", newUrl);
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert("Post লোড করা যাচ্ছে না।");
+
+  }
+
+}
+
+
+// ===============================
+// CLOSE MODAL
+// ===============================
+
+function closePostModal(){
+
+  document
+    .getElementById("postModal")
+    .classList.remove("show");
+
+
+  history.pushState(
+    {},
+    "",
+    window.location.pathname
+  );
+
+}
+
+
+// বাইরে click করলে modal বন্ধ
+
+document
+  .getElementById("postModal")
+  .addEventListener("click", function(e){
+
+    if(e.target === this){
+
+      closePostModal();
+
+    }
+
+  });
+
+
+// ===============================
+// CHECK URL POST ID
+// ===============================
+
+function checkPostFromURL(){
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const postId =
+    params.get("post");
+
+  if(postId){
+
+    setTimeout(
+      () => openPostModal(postId),
+      300
+    );
+
+  }
+
+}
+
+
+// ===============================
+// SHARE FUNCTIONS
+// ===============================
+
+function shareWhatsApp(url,title){
+
+  const shareUrl =
+    "https://wa.me/?text=" +
+    encodeURIComponent(title + "\n" + url);
+
+  window.open(
+    shareUrl,
+    "_blank",
+    "noopener"
+  );
+
+}
+
+
+function shareFacebook(url){
+
+  const shareUrl =
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    encodeURIComponent(url);
+
+  window.open(
+    shareUrl,
+    "_blank",
+    "noopener"
+  );
+
+}
+
+
+function shareTelegram(url,title){
+
+  const shareUrl =
+    "https://t.me/share/url?url=" +
+    encodeURIComponent(url) +
+    "&text=" +
+    encodeURIComponent(title);
+
+  window.open(
+    shareUrl,
+    "_blank",
+    "noopener"
+  );
+
+}
+
+
+async function copyPostLink(url){
+
+  try{
+
+    await navigator.clipboard.writeText(url);
+
+    alert("Post link copied!");
+
+  }catch(error){
+
+    prompt(
+      "এই link-টি copy করুন:",
+      url
+    );
+
+  }
+
+}
+
+
+// ===============================
+// SECURITY / TEXT HELPERS
+// ===============================
+
+function escapeHTML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,"&quot;");
+
+}
+
+
+function formatText(value){
+
+  return escapeHTML(value)
+    .replace(/\n/g,"<br>");
+
+}
+
+
+// ===============================
+// START
+// ===============================
+
+loadResults();
+
+checkPostFromURL();
+
+</script>
+
+</body>
+</html>
