@@ -1,1 +1,1441 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Government Jobs – WB Help</title><meta name="description" content="West Bengal government job information in Bengali. Sample listings are included for layout demonstration."><link rel="canonical" href="https://wbhelp.github.io/jobs.html"><link rel="stylesheet" href="css/style.css"><script defer src="js/script.js"></script></head><body><header class="header"><div class="container nav-wrap"><a class="brand" href="index.html"><span class="logo">WB</span><span><span class="brand-title">WB Help</span><span class="brand-tag">সরকারি পরিষেবা এখন সহজ বাংলায়</span></span></a><nav id="siteNav" class="nav"><a href="index.html">Home</a><a class="active" href="jobs.html">Jobs</a><a href="admit-card.html">Admit Card</a><a href="result.html">Result</a><a href="schemes.html">Government Schemes</a><a href="services.html">Government Services</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">◐</button><button id="menuToggle" class="menu-btn" aria-label="Open menu">☰</button></div></div></header><main><section class="page-head"><div class="container"><div class="breadcrumbs"><a href="index.html">Home</a> / Jobs</div><h1>Government Jobs</h1><p class="meta">নমুনা চাকরির তালিকা—অফিসিয়াল বিজ্ঞপ্তি যাচাই করে তথ্য প্রতিস্থাপন করুন।</p></div></section><section class="section"><div class="container"><div class="grid-3"><article class="job-card card"><span class="tag">Sample</span><h3>Sample Government Job Notification 2026</h3><p>নমুনা নিয়োগ বিজ্ঞপ্তির সংক্ষিপ্ত বিবরণ।</p><div class="row"><span>Organization</span><span>Sample Organization</span></div><div class="row"><span>Last Date</span><span>Not provided</span></div><a class="btn btn-primary" style="margin-top:12px" href="posts/sample-job.html">Read More</a></article><article class="job-card card"><span class="tag">Sample</span><h3>Sample Clerk Recruitment 2026</h3><p>নমুনা ক্লার্ক নিয়োগের কার্ড।</p><div class="row"><span>Organization</span><span>Sample Department</span></div><div class="row"><span>Last Date</span><span>Not provided</span></div><a class="btn btn-primary" style="margin-top:12px" href="posts/sample-job.html">Read More</a></article><article class="job-card card"><span class="tag">Sample</span><h3>Sample Assistant Recruitment 2026</h3><p>নমুনা অ্যাসিস্ট্যান্ট নিয়োগের কার্ড।</p><div class="row"><span>Organization</span><span>Sample Board</span></div><div class="row"><span>Last Date</span><span>Not provided</span></div><a class="btn btn-primary" style="margin-top:12px" href="posts/sample-job.html">Read More</a></article></div></div></section></main><footer class="footer"><div class="container"><div class="footer-grid"><div><h3>WB Help</h3><p>সরকারি তথ্য সহজ বাংলায়।</p></div><div><h4>Quick Links</h4><p><a href="index.html">Home</a></p><p><a href="jobs.html">Jobs</a></p></div><div><h4>Categories</h4><p><a href="admit-card.html">Admit Card</a></p><p><a href="result.html">Result</a></p></div><div><h4>Legal</h4><p><a href="privacy.html">Privacy Policy</a></p><p><a href="disclaimer.html">Disclaimer</a></p></div></div><div class="copy">© 2026 WB Help.</div></div></footer></body></html>
+<!doctype html>
+<html lang="bn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Government Jobs – WB Help</title>
+
+  <meta
+    name="description"
+    content="West Bengal government job information in Bengali. Latest recruitment and application updates."
+  >
+
+  <link
+    rel="canonical"
+    href="https://wbhelp.github.io/jobs.html"
+  >
+
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/script.js"></script>
+
+  <style>
+    .dynamic-loading,
+    .dynamic-empty,
+    .dynamic-error {
+      width: 100%;
+      padding: 25px;
+      text-align: center;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      margin-top: 10px;
+    }
+
+    .dynamic-error {
+      color: #b91c1c;
+    }
+
+    .dynamic-empty {
+      color: #64748b;
+    }
+
+    .job-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .share-box {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .share-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .share-buttons a,
+    .share-buttons button {
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      background: #eef2ff;
+      color: #1e293b;
+    }
+
+    .post-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.65);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .post-modal.active {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .post-modal-box {
+      width: 100%;
+      max-width: 850px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 16px;
+      padding: 25px;
+      position: relative;
+      box-shadow: 0 15px 50px rgba(0,0,0,.25);
+    }
+
+    .post-modal-close {
+      position: absolute;
+      right: 15px;
+      top: 12px;
+      border: 0;
+      background: transparent;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .modal-section {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .modal-section h4 {
+      margin-bottom: 7px;
+    }
+
+    .modal-share {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .modal-share a,
+    .modal-share button {
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      background: #eef2ff;
+      color: #111827;
+    }
+
+    @media(max-width:600px) {
+      .post-modal {
+        padding: 10px;
+      }
+
+      .post-modal-box {
+        margin: 10px auto;
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="container nav-wrap">
+
+    <a class="brand" href="index.html">
+
+      <span class="logo">WB</span>
+
+      <span>
+        <span class="brand-title">WB Help</span>
+        <span class="brand-tag">
+          সরকারি পরিষেবা এখন সহজ বাংলায়
+        </span>
+      </span>
+
+    </a>
+
+
+    <nav id="siteNav" class="nav">
+
+      <a href="index.html">Home</a>
+
+      <a class="active" href="jobs.html">Jobs</a>
+
+      <a href="admit-card.html">Admit Card</a>
+
+      <a href="result.html">Result</a>
+
+      <a href="schemes.html">Government Schemes</a>
+
+      <a href="services.html">Government Services</a>
+
+      <a href="contact.html">Contact</a>
+
+    </nav>
+
+
+    <div class="nav-actions">
+
+      <button
+        id="themeToggle"
+        class="icon-btn"
+        aria-label="Toggle dark mode"
+      >
+        ◐
+      </button>
+
+      <button
+        id="menuToggle"
+        class="menu-btn"
+        aria-label="Open menu"
+      >
+        ☰
+      </button>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- PAGE HEAD -->
+
+<section class="page-head">
+
+  <div class="container">
+
+    <div class="breadcrumbs">
+
+      <a href="index.html">Home</a> / Jobs
+
+    </div>
+
+    <h1>Government Jobs</h1>
+
+    <p class="meta">
+      WB Help Dashboard থেকে প্রকাশিত সরকারি চাকরির সর্বশেষ তথ্য।
+      আবেদন করার আগে অবশ্যই অফিসিয়াল বিজ্ঞপ্তি যাচাই করুন।
+    </p>
+
+  </div>
+
+</section>
+
+
+
+<!-- JOB LIST -->
+
+<section class="section">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <div>
+
+        <h2>Latest Government Jobs</h2>
+
+        <p>
+          সর্বশেষ নিয়োগ ও আবেদন সংক্রান্ত তথ্য
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div id="jobsList" class="grid-3">
+
+      <div class="dynamic-loading">
+
+        চাকরির পোস্ট লোড হচ্ছে...
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- POST MODAL -->
+
+<div id="postModal" class="post-modal">
+
+  <div class="post-modal-box">
+
+    <button
+      class="post-modal-close"
+      onclick="closePostModal()"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <div id="postModalContent"></div>
+
+  </div>
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-grid">
+
+
+      <div>
+
+        <h3>WB Help</h3>
+
+        <p>
+          সরকারি চাকরি, পরিষেবা, প্রকল্প ও গুরুত্বপূর্ণ তথ্য সহজ বাংলায়।
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>Quick Links</h4>
+
+        <p>
+          <a href="index.html">Home</a>
+        </p>
+
+        <p>
+          <a href="jobs.html">Jobs</a>
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>Categories</h4>
+
+        <p>
+          <a href="admit-card.html">Admit Card</a>
+        </p>
+
+        <p>
+          <a href="result.html">Result</a>
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>Legal</h4>
+
+        <p>
+          <a href="privacy.html">Privacy Policy</a>
+        </p>
+
+        <p>
+          <a href="disclaimer.html">Disclaimer</a>
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="copy">
+
+      © 2026 WB Help.
+      This is an independent information portal and is not a government website unless explicitly stated.
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   WB HELP CLOUDFLARE WORKER API
+   ========================================================= */
+
+const WBHELP_API =
+  "https://wbhelp-admin-server.mahatosumanapd.workers.dev";
+
+
+let allJobs = [];
+
+
+/* =========================================================
+   LOAD JOBS
+   ========================================================= */
+
+async function loadJobs() {
+
+  const container =
+    document.getElementById("jobsList");
+
+
+  try {
+
+    const response = await fetch(
+      WBHELP_API + "/api/posts",
+      {
+        method: "GET",
+        headers: {
+          "Accept": "application/json"
+        }
+      }
+    );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "API response error"
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const posts =
+      Array.isArray(data.posts)
+        ? data.posts
+        : [];
+
+
+    /*
+      Category matching:
+
+      সরকারি চাকরি
+      Government Jobs
+      Jobs
+      Job
+    */
+
+    allJobs = posts.filter(function(post) {
+
+      const category =
+        normalizeText(post.category);
+
+      return (
+        category === normalizeText("সরকারি চাকরি") ||
+        category === normalizeText("Government Jobs") ||
+        category === normalizeText("Jobs") ||
+        category === normalizeText("Job")
+      );
+
+    });
+
+
+    /*
+      যদি Dashboard-এ category অন্যভাবে
+      লেখা হয় কিন্তু title recruitment/job হয়,
+      তখনও job হিসেবে ধরবে।
+    */
+
+    if (!allJobs.length) {
+
+      allJobs = posts.filter(function(post) {
+
+        const category =
+          normalizeText(post.category);
+
+        const title =
+          normalizeText(post.title);
+
+        return (
+          category.includes("job") ||
+          category.includes("চাকরি") ||
+          title.includes("recruitment") ||
+          title.includes("job") ||
+          title.includes("নিয়োগ")
+        );
+
+      });
+
+    }
+
+
+    renderJobs();
+
+
+    openPostFromURL();
+
+
+  } catch (error) {
+
+    console.error(
+      "WB Help Jobs API Error:",
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="dynamic-error">
+
+        চাকরির পোস্ট লোড করা যাচ্ছে না।
+        কিছুক্ষণ পরে আবার চেষ্টা করুন।
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   RENDER JOBS
+   ========================================================= */
+
+function renderJobs() {
+
+  const container =
+    document.getElementById("jobsList");
+
+
+  if (!allJobs.length) {
+
+    container.innerHTML = `
+
+      <div class="dynamic-empty">
+
+        এখনও কোনও সরকারি চাকরির পোস্ট প্রকাশ করা হয়নি।
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    allJobs
+      .map(function(post) {
+
+        return createJobCard(post);
+
+      })
+      .join("");
+
+}
+
+
+
+/* =========================================================
+   JOB CARD
+   ========================================================= */
+
+function createJobCard(post) {
+
+  const title =
+    escapeHTML(
+      post.title ||
+      "Government Job"
+    );
+
+
+  const description =
+    escapeHTML(
+      post.description ||
+      "বিস্তারিত তথ্য দেখতে Details চাপুন।"
+    );
+
+
+  const category =
+    escapeHTML(
+      post.category ||
+      "সরকারি চাকরি"
+    );
+
+
+  const date =
+    formatDate(post.date);
+
+
+  const id =
+    escapeJS(
+      String(post.id)
+    );
+
+
+  const lastDate =
+    getLastDate(
+      post.importantDates
+    );
+
+
+  const shareUrl =
+    getPostURL(post.id);
+
+
+  return `
+
+    <article class="job-card card">
+
+
+      <span class="tag">
+
+        ${category}
+
+      </span>
+
+
+      <h3>
+
+        ${title}
+
+      </h3>
+
+
+      <p>
+
+        ${description}
+
+      </p>
+
+
+      <div class="row">
+
+        <span>
+          Published
+        </span>
+
+        <span>
+          ${date}
+        </span>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Last Date
+        </span>
+
+        <span>
+          ${lastDate}
+        </span>
+
+      </div>
+
+
+      <div class="job-actions">
+
+
+        <button
+          type="button"
+          class="btn btn-light"
+          onclick="openPostModal('${id}')"
+        >
+          Read More
+        </button>
+
+
+        ${
+          post.officialLink
+          ?
+          `
+          <a
+            class="btn btn-primary"
+            href="${safeURL(post.officialLink)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Apply
+          </a>
+          `
+          :
+          ""
+        }
+
+
+      </div>
+
+
+
+      <!-- SHARE -->
+
+      <div class="share-box">
+
+        <strong>
+          📤 পোস্টটি শেয়ার করুন
+        </strong>
+
+
+        <div class="share-buttons">
+
+
+          <a
+            href="${getWhatsAppURL(
+              post.title,
+              shareUrl
+            )}"
+            target="_blank"
+            rel="noopener"
+          >
+            WhatsApp
+          </a>
+
+
+          <a
+            href="${getFacebookURL(
+              shareUrl
+            )}"
+            target="_blank"
+            rel="noopener"
+          >
+            Facebook
+          </a>
+
+
+          <a
+            href="${getTelegramURL(
+              post.title,
+              shareUrl
+            )}"
+            target="_blank"
+            rel="noopener"
+          >
+            Telegram
+          </a>
+
+
+          <button
+            type="button"
+            onclick="copyPostLink('${escapeJS(shareUrl)}')"
+          >
+            Copy Link
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+    </article>
+
+  `;
+
+}
+
+
+
+/* =========================================================
+   POST MODAL
+   ========================================================= */
+
+function openPostModal(id) {
+
+
+  const post =
+    allJobs.find(function(item) {
+
+      return String(item.id) === String(id);
+
+    });
+
+
+  if (!post) {
+
+    alert("Post পাওয়া যায়নি।");
+
+    return;
+
+  }
+
+
+  const modal =
+    document.getElementById(
+      "postModal"
+    );
+
+
+  const content =
+    document.getElementById(
+      "postModalContent"
+    );
+
+
+  const shareUrl =
+    getPostURL(post.id);
+
+
+  content.innerHTML = `
+
+
+    <div class="tags">
+
+      <span class="tag">
+
+        ${escapeHTML(
+          post.category ||
+          "সরকারি চাকরি"
+        )}
+
+      </span>
+
+    </div>
+
+
+    <h2>
+
+      ${escapeHTML(
+        post.title ||
+        "Government Job"
+      )}
+
+    </h2>
+
+
+    <div class="meta">
+
+      প্রকাশিত:
+      ${formatDate(post.date)}
+
+    </div>
+
+
+
+    <div class="modal-section">
+
+      <h4>
+        বিবরণ
+      </h4>
+
+      <p>
+        ${escapeHTML(
+          post.description ||
+          "বিবরণ দেওয়া হয়নি।"
+        )}
+      </p>
+
+    </div>
+
+
+
+    ${makeField(
+      "গুরুত্বপূর্ণ তারিখ",
+      post.importantDates
+    )}
+
+
+    ${makeField(
+      "আবেদন ফি",
+      post.applicationFee
+    )}
+
+
+    ${makeField(
+      "বয়সসীমা",
+      post.ageLimit
+    )}
+
+
+    ${makeField(
+      "শূন্যপদ / Vacancy",
+      post.vacancyDetails
+    )}
+
+
+    ${makeField(
+      "শিক্ষাগত যোগ্যতা",
+      post.educationalQualification
+    )}
+
+
+    ${makeField(
+      "নির্বাচন পদ্ধতি",
+      post.selectionProcess
+    )}
+
+
+    ${makeField(
+      "কীভাবে আবেদন করবেন",
+      post.howToApply
+    )}
+
+
+    ${makeField(
+      "অন্যান্য তথ্য",
+      post.otherDetails
+    )}
+
+
+
+    ${
+      post.officialLink
+      ?
+      `
+
+      <div class="modal-section">
+
+        <h4>
+          Official Link
+        </h4>
+
+
+        <a
+          class="btn btn-primary"
+          href="${safeURL(post.officialLink)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Official Website / Apply
+        </a>
+
+      </div>
+
+      `
+      :
+      ""
+    }
+
+
+
+    <div class="modal-section">
+
+      <h4>
+        📤 পোস্টটি শেয়ার করুন
+      </h4>
+
+
+      <div class="modal-share">
+
+
+        <a
+          href="${getWhatsAppURL(
+            post.title,
+            shareUrl
+          )}"
+          target="_blank"
+          rel="noopener"
+        >
+          WhatsApp
+        </a>
+
+
+        <a
+          href="${getFacebookURL(
+            shareUrl
+          )}"
+          target="_blank"
+          rel="noopener"
+        >
+          Facebook
+        </a>
+
+
+        <a
+          href="${getTelegramURL(
+            post.title,
+            shareUrl
+          )}"
+          target="_blank"
+          rel="noopener"
+        >
+          Telegram
+        </a>
+
+
+        <button
+          type="button"
+          onclick="copyPostLink('${escapeJS(shareUrl)}')"
+        >
+          Copy Link
+        </button>
+
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  modal.classList.add("active");
+
+  document.body.style.overflow =
+    "hidden";
+
+
+  history.replaceState(
+    null,
+    "",
+    "jobs.html?post=" +
+    encodeURIComponent(post.id)
+  );
+
+}
+
+
+
+/* =========================================================
+   CLOSE MODAL
+   ========================================================= */
+
+function closePostModal() {
+
+  const modal =
+    document.getElementById(
+      "postModal"
+    );
+
+
+  modal.classList.remove(
+    "active"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+
+  history.replaceState(
+    null,
+    "",
+    "jobs.html"
+  );
+
+}
+
+
+
+/* Click outside */
+
+document.getElementById(
+  "postModal"
+).addEventListener(
+  "click",
+  function(event) {
+
+    if (
+      event.target === this
+    ) {
+
+      closePostModal();
+
+    }
+
+  }
+);
+
+
+/* ESC */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closePostModal();
+
+    }
+
+  }
+);
+
+
+
+/* =========================================================
+   OPEN POST FROM URL
+   ========================================================= */
+
+function openPostFromURL() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const id =
+    params.get("post");
+
+
+  if (!id) {
+    return;
+  }
+
+
+  const post =
+    allJobs.find(function(item) {
+
+      return String(item.id) === String(id);
+
+    });
+
+
+  if (post) {
+
+    openPostModal(id);
+
+  }
+
+}
+
+
+
+/* =========================================================
+   SHARE
+   ========================================================= */
+
+function getPostURL(id) {
+
+  return (
+    window.location.origin +
+    window.location.pathname +
+    "?post=" +
+    encodeURIComponent(id)
+  );
+
+}
+
+
+function getWhatsAppURL(
+  title,
+  url
+) {
+
+  return (
+    "https://wa.me/?text=" +
+    encodeURIComponent(
+      String(title || "WB Help") +
+      " - " +
+      String(url || "")
+    )
+  );
+
+}
+
+
+function getFacebookURL(url) {
+
+  return (
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    encodeURIComponent(url)
+  );
+
+}
+
+
+function getTelegramURL(
+  title,
+  url
+) {
+
+  return (
+    "https://t.me/share/url?url=" +
+    encodeURIComponent(url) +
+    "&text=" +
+    encodeURIComponent(
+      title || "WB Help"
+    )
+  );
+
+}
+
+
+function copyPostLink(url) {
+
+  if (
+    navigator.clipboard
+  ) {
+
+    navigator.clipboard
+      .writeText(url)
+      .then(function() {
+
+        alert(
+          "Post link copied!"
+        );
+
+      })
+      .catch(function() {
+
+        alert(
+          "Link copy করা যায়নি।"
+        );
+
+      });
+
+  } else {
+
+    prompt(
+      "এই link টি copy করুন:",
+      url
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function normalizeText(value) {
+
+  return String(value || "")
+    .toLowerCase()
+    .trim();
+
+}
+
+
+function escapeHTML(value) {
+
+  return String(value || "")
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeJS(value) {
+
+  return String(value || "")
+    .replace(
+      /\\/g,
+      "\\\\"
+    )
+    .replace(
+      /'/g,
+      "\\'"
+    )
+    .replace(
+      /\n/g,
+      "\\n"
+    )
+    .replace(
+      /\r/g,
+      "\\r"
+    );
+
+}
+
+
+function safeURL(url) {
+
+  const value =
+    String(url || "").trim();
+
+
+  if (
+    value.startsWith(
+      "https://"
+    ) ||
+    value.startsWith(
+      "http://"
+    )
+  ) {
+
+    return escapeHTML(
+      value
+    );
+
+  }
+
+
+  return "#";
+
+}
+
+
+function formatDate(
+  dateValue
+) {
+
+  if (!dateValue) {
+
+    return "তারিখ দেওয়া হয়নি";
+
+  }
+
+
+  const date =
+    new Date(dateValue);
+
+
+  if (
+    isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return escapeHTML(
+      dateValue
+    );
+
+  }
+
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    }
+  );
+
+}
+
+
+function getLastDate(
+  text
+) {
+
+  if (!text) {
+
+    return "Not provided";
+
+  }
+
+
+  const value =
+    String(text);
+
+
+  const match =
+    value.match(
+      /last\s*date[^:]*:\s*([^\n]+)/i
+    );
+
+
+  if (match) {
+
+    return escapeHTML(
+      match[1].trim()
+    );
+
+  }
+
+
+  return escapeHTML(
+    value.substring(
+      0,
+      70
+    )
+  );
+
+}
+
+
+function makeField(
+  label,
+  value
+) {
+
+  if (!value) {
+
+    return "";
+
+  }
+
+
+  return `
+
+    <div class="modal-section">
+
+      <h4>
+        ${escapeHTML(label)}
+      </h4>
+
+      <p>
+        ${escapeHTML(value)}
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+loadJobs();
+
+</script>
+
+
+</body>
+</html>
