@@ -86,6 +86,14 @@ margin-top:0;
 font-size:20px
 }
 
+.section-title{
+margin:25px 0 15px;
+padding-bottom:8px;
+border-bottom:1px solid #e5edf5;
+font-size:17px;
+color:#0b63ce
+}
+
 .field{
 margin-bottom:15px
 }
@@ -107,12 +115,19 @@ outline:none
 }
 
 input:focus,textarea:focus,select:focus{
-border-color:#0b63ce
+border-color:#0b63ce;
+box-shadow:0 0 0 3px rgba(11,99,206,.08)
 }
 
 textarea{
-min-height:130px;
+min-height:105px;
 resize:vertical
+}
+
+.small-text{
+font-size:12px;
+color:#63758a;
+margin-top:5px
 }
 
 .btn{
@@ -138,6 +153,11 @@ background:#ffecec;
 color:#c62828
 }
 
+.btn-edit{
+background:#fff7e6;
+color:#9a6500
+}
+
 .actions{
 display:flex;
 gap:8px;
@@ -150,11 +170,29 @@ margin-top:20px;
 padding:18px;
 background:#f7fafc;
 border:1px dashed #dce5ee;
-border-radius:12px
+border-radius:12px;
+line-height:1.6
 }
 
 .preview h3{
-margin-top:0
+margin-top:0;
+color:#17324d
+}
+
+.preview-section{
+margin-top:18px;
+padding-top:12px;
+border-top:1px solid #e3ebf3
+}
+
+.preview-section h4{
+margin:0 0 6px;
+color:#0b63ce
+}
+
+.meta{
+font-size:12px;
+color:#63758a
 }
 
 .status{
@@ -168,6 +206,12 @@ display:none
 display:block;
 background:#e9f8f2;
 color:#08795f
+}
+
+.error{
+display:block;
+background:#fff0f0;
+color:#c62828
 }
 
 .post-list{
@@ -186,8 +230,15 @@ background:#fff
 margin:0 0 5px
 }
 
-.meta{
-font-size:12px;
+.post-description{
+color:#40566b;
+font-size:14px;
+line-height:1.5
+}
+
+.post-details{
+margin-top:10px;
+font-size:13px;
 color:#63758a
 }
 
@@ -199,7 +250,19 @@ border:1px dashed #dce5ee;
 border-radius:10px
 }
 
+.badge{
+display:inline-block;
+background:#eef5ff;
+color:#0b63ce;
+padding:4px 9px;
+border-radius:20px;
+font-size:11px;
+font-weight:700;
+margin-bottom:8px
+}
+
 @media(max-width:700px){
+
 .grid{
 grid-template-columns:1fr
 }
@@ -211,6 +274,11 @@ align-items:flex-start
 .dashboard-title h1{
 font-size:24px
 }
+
+.card{
+padding:18px
+}
+
 }
 </style>
 </head>
@@ -231,16 +299,26 @@ Logout
 </div>
 </header>
 
+
 <main class="container">
 
 <div class="dashboard-title">
+
 <h1>Admin Dashboard</h1>
-<p>এখান থেকে নতুন পোস্ট তৈরি ও Preview করতে পারবে।</p>
+
+<p>
+এখান থেকে নতুন পোস্ট তৈরি, Preview, Edit ও Delete করতে পারবে।
+</p>
+
 </div>
+
 
 <div class="grid">
 
-<!-- CREATE POST -->
+
+<!-- =========================
+     CREATE POST
+========================= -->
 
 <section class="card">
 
@@ -248,22 +326,40 @@ Logout
 
 <form id="postForm">
 
+
+<!-- BASIC INFORMATION -->
+
+<div class="section-title">
+📌 Basic Information
+</div>
+
+
 <div class="field">
-<label for="postTitle">Post Title</label>
+
+<label for="postTitle">
+Post Title
+</label>
 
 <input
 type="text"
 id="postTitle"
 placeholder="যেমন: SSC CHSL 2026"
 required>
+
 </div>
 
+
 <div class="field">
-<label for="postCategory">Category</label>
+
+<label for="postCategory">
+Category
+</label>
 
 <select id="postCategory" required>
 
-<option value="">Category নির্বাচন করুন</option>
+<option value="">
+Category নির্বাচন করুন
+</option>
 
 <option value="সরকারি চাকরি">
 সরকারি চাকরি
@@ -290,27 +386,186 @@ Important Updates
 </option>
 
 </select>
+
 </div>
 
+
 <div class="field">
-<label for="postDate">Publish Date</label>
+
+<label for="postDate">
+Publish Date
+</label>
 
 <input
 type="date"
 id="postDate"
 required>
+
 </div>
 
+
 <div class="field">
-<label for="postDescription">Short Description</label>
+
+<label for="postDescription">
+Short Description
+</label>
 
 <textarea
 id="postDescription"
-placeholder="পোস্ট সম্পর্কে সংক্ষিপ্ত তথ্য লিখুন..."
+placeholder="পোস্ট সম্পর্কে ২-৪ লাইনের সংক্ষিপ্ত তথ্য লিখুন..."
 required></textarea>
+
 </div>
 
+
+<!-- IMPORTANT DETAILS -->
+
+<div class="section-title">
+📋 Important Details
+</div>
+
+
 <div class="field">
+
+<label for="importantDates">
+📅 Important Dates
+</label>
+
+<textarea
+id="importantDates"
+placeholder="যেমন:
+আবেদন শুরু: 01/10/2026
+আবেদনের শেষ তারিখ: 30/10/2026
+পরীক্ষার তারিখ: পরে জানানো হবে"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="applicationFee">
+💰 Application Fee
+</label>
+
+<textarea
+id="applicationFee"
+placeholder="যেমন:
+General/OBC: ₹100
+SC/ST: ₹0"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="ageLimit">
+🎂 Age Limit
+</label>
+
+<textarea
+id="ageLimit"
+placeholder="যেমন:
+Minimum Age: 18 বছর
+Maximum Age: 27 বছর
+Age Relaxation: সরকারি নিয়ম অনুযায়ী"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="vacancyDetails">
+👥 Vacancy Details
+</label>
+
+<textarea
+id="vacancyDetails"
+placeholder="যেমন:
+মোট শূন্যপদ: 2536
+Post Name অনুযায়ী vacancy details এখানে লিখুন।"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="educationalQualification">
+🎓 Educational Qualification
+</label>
+
+<textarea
+id="educationalQualification"
+placeholder="যেমন:
+প্রার্থীকে স্বীকৃত বোর্ড থেকে 12th Pass হতে হবে।"></textarea>
+
+</div>
+
+
+<!-- SELECTION -->
+
+<div class="section-title">
+📝 Selection & Application
+</div>
+
+
+<div class="field">
+
+<label for="selectionProcess">
+📋 Selection Process
+</label>
+
+<textarea
+id="selectionProcess"
+placeholder="যেমন:
+Written Examination
+Skill Test
+Document Verification
+Medical Examination"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="howToApply">
+🖥️ How to Apply
+</label>
+
+<textarea
+id="howToApply"
+placeholder="যেমন:
+1. Official Website খুলুন।
+2. Apply Online-এ ক্লিক করুন।
+3. Registration করুন।
+4. Form পূরণ করুন।
+5. প্রয়োজনীয় documents upload করুন।
+6. Submit করুন।"></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label for="otherDetails">
+ℹ️ Other Details
+</label>
+
+<textarea
+id="otherDetails"
+placeholder="অন্য গুরুত্বপূর্ণ তথ্য এখানে লিখুন..."></textarea>
+
+</div>
+
+
+<!-- LINK -->
+
+<div class="section-title">
+🔗 Official Link
+</div>
+
+
+<div class="field">
+
 <label for="officialLink">
 Official Website / Apply Link
 </label>
@@ -319,7 +574,15 @@ Official Website / Apply Link
 type="url"
 id="officialLink"
 placeholder="https://example.com">
+
+<div class="small-text">
+Official website অথবা Apply Online-এর link দিন।
 </div>
+
+</div>
+
+
+<!-- BUTTONS -->
 
 <div class="actions">
 
@@ -330,30 +593,52 @@ id="previewBtn">
 👁️ Preview
 </button>
 
+
 <button
 type="submit"
-class="btn btn-primary">
+class="btn btn-primary"
+id="saveBtn">
 💾 Save Post
+</button>
+
+
+<button
+type="button"
+class="btn btn-danger"
+id="cancelEditBtn"
+style="display:none">
+Cancel Edit
 </button>
 
 </div>
 
+
 </form>
 
-<div id="status" class="status"></div>
+
+<div
+id="status"
+class="status">
+</div>
 
 </section>
 
 
-<!-- PREVIEW -->
+<!-- =========================
+     PREVIEW
+========================= -->
 
 <section class="card">
 
 <h2>👁️ Post Preview</h2>
 
-<div id="previewBox" class="preview">
+<div
+id="previewBox"
+class="preview">
 
-<h3>এখানে Preview দেখা যাবে</h3>
+<h3>
+এখানে Preview দেখা যাবে
+</h3>
 
 <p class="meta">
 Post-এর তথ্য লিখে Preview চাপুন।
@@ -366,13 +651,20 @@ Post-এর তথ্য লিখে Preview চাপুন।
 </div>
 
 
-<!-- SAVED POSTS -->
+<!-- =========================
+     SAVED POSTS
+========================= -->
 
-<section class="card" style="margin-top:20px">
+<section
+class="card"
+style="margin-top:20px">
 
 <h2>📚 Saved Posts</h2>
 
-<div id="postList" class="post-list"></div>
+<div
+id="postList"
+class="post-list">
+</div>
 
 </section>
 
@@ -389,7 +681,9 @@ Post-এর তথ্য লিখে Preview চাপুন।
 ========================= */
 
 const loggedIn =
-sessionStorage.getItem("wbhelp_admin_login");
+sessionStorage.getItem(
+"wbhelp_admin_login"
+);
 
 if(loggedIn !== "true"){
 
@@ -417,23 +711,84 @@ document.getElementById("postDate");
 const description =
 document.getElementById("postDescription");
 
+const importantDates =
+document.getElementById("importantDates");
+
+const applicationFee =
+document.getElementById("applicationFee");
+
+const ageLimit =
+document.getElementById("ageLimit");
+
+const vacancyDetails =
+document.getElementById("vacancyDetails");
+
+const educationalQualification =
+document.getElementById(
+"educationalQualification"
+);
+
+const selectionProcess =
+document.getElementById(
+"selectionProcess"
+);
+
+const howToApply =
+document.getElementById(
+"howToApply"
+);
+
+const otherDetails =
+document.getElementById(
+"otherDetails"
+);
+
 const officialLink =
-document.getElementById("officialLink");
+document.getElementById(
+"officialLink"
+);
 
 const previewBtn =
-document.getElementById("previewBtn");
+document.getElementById(
+"previewBtn"
+);
 
 const previewBox =
-document.getElementById("previewBox");
+document.getElementById(
+"previewBox"
+);
 
 const statusBox =
-document.getElementById("status");
+document.getElementById(
+"status"
+);
 
 const postList =
-document.getElementById("postList");
+document.getElementById(
+"postList"
+);
 
 const logoutBtn =
-document.getElementById("logoutBtn");
+document.getElementById(
+"logoutBtn"
+);
+
+const saveBtn =
+document.getElementById(
+"saveBtn"
+);
+
+const cancelEditBtn =
+document.getElementById(
+"cancelEditBtn"
+);
+
+
+/* =========================
+   EDIT STATE
+========================= */
+
+let editingPostId = null;
 
 
 /* =========================
@@ -441,7 +796,9 @@ document.getElementById("logoutBtn");
 ========================= */
 
 const today =
-new Date().toISOString().split("T")[0];
+new Date()
+.toISOString()
+.split("T")[0];
 
 date.value=today;
 
@@ -455,7 +812,9 @@ function getPosts(){
 try{
 
 return JSON.parse(
-localStorage.getItem("wbhelp_posts") || "[]"
+localStorage.getItem(
+"wbhelp_posts"
+) || "[]"
 );
 
 }catch(error){
@@ -473,6 +832,52 @@ localStorage.setItem(
 "wbhelp_posts",
 JSON.stringify(posts)
 );
+
+}
+
+
+/* =========================
+   PREVIEW SECTION
+========================= */
+
+function previewSection(
+titleText,
+value
+){
+
+if(!value || !value.trim()){
+
+return "";
+
+}
+
+return `
+
+<div class="preview-section">
+
+<h4>
+${escapeHTML(titleText)}
+</h4>
+
+<div>
+${formatText(value)}
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================
+   FORMAT TEXT
+========================= */
+
+function formatText(value){
+
+return escapeHTML(value)
+.replace(/\n/g,"<br>");
 
 }
 
@@ -501,7 +906,7 @@ officialLink.value.trim();
 
 if(!titleValue){
 
-previewBox.innerHTML=
+previewBox.innerHTML =
 "<p>Post Title লিখুন।</p>";
 
 return;
@@ -509,44 +914,113 @@ return;
 }
 
 
-previewBox.innerHTML=`
+previewBox.innerHTML = `
 
-<div>
-<span style="
-background:#eef5ff;
-color:#0b63ce;
-padding:4px 9px;
-border-radius:20px;
-font-size:11px;
-font-weight:700;
-">
-${categoryValue || "Category"}
+<span class="badge">
+
+${escapeHTML(
+categoryValue || "Category"
+)}
+
 </span>
 
-<h3>${escapeHTML(titleValue)}</h3>
+
+<h3>
+${escapeHTML(titleValue)}
+</h3>
+
 
 <p>
-${escapeHTML(descriptionValue)}
+${formatText(
+descriptionValue ||
+"সংক্ষিপ্ত Description এখানে দেখা যাবে।"
+)}
 </p>
 
+
 <p class="meta">
-প্রকাশিত: ${dateValue || "Date"}
+
+প্রকাশিত:
+${escapeHTML(
+dateValue || "Date"
+)}
+
 </p>
+
+
+${previewSection(
+"📅 Important Dates",
+importantDates.value
+)}
+
+
+${previewSection(
+"💰 Application Fee",
+applicationFee.value
+)}
+
+
+${previewSection(
+"🎂 Age Limit",
+ageLimit.value
+)}
+
+
+${previewSection(
+"👥 Vacancy Details",
+vacancyDetails.value
+)}
+
+
+${previewSection(
+"🎓 Educational Qualification",
+educationalQualification.value
+)}
+
+
+${previewSection(
+"📋 Selection Process",
+selectionProcess.value
+)}
+
+
+${previewSection(
+"🖥️ How to Apply",
+howToApply.value
+)}
+
+
+${previewSection(
+"ℹ️ Other Details",
+otherDetails.value
+)}
+
 
 ${
 linkValue
 ?
-`<a
+
+`
+
+<div class="preview-section">
+
+<a
 href="${escapeAttribute(linkValue)}"
 target="_blank"
 rel="noopener"
 class="btn btn-primary">
-Official Website
-</a>`
-:""
-}
+
+Official Website / Apply
+
+</a>
 
 </div>
+
+`
+
+:""
+
+}
 
 `;
 
@@ -554,7 +1028,31 @@ Official Website
 
 
 /* =========================
-   SAVE POST
+   RESET FORM
+========================= */
+
+function resetForm(){
+
+form.reset();
+
+date.value=today;
+
+editingPostId=null;
+
+saveBtn.textContent=
+"💾 Save Post";
+
+cancelEditBtn.style.display=
+"none";
+
+previewBox.innerHTML=
+"<h3>এখানে Preview দেখা যাবে</h3><p class='meta'>Post-এর তথ্য লিখে Preview চাপুন।</p>";
+
+}
+
+
+/* =========================
+   SAVE / UPDATE POST
 ========================= */
 
 form.addEventListener(
@@ -564,51 +1062,111 @@ function(event){
 event.preventDefault();
 
 
-const post={
+const post = {
 
-id:Date.now(),
+id:
+editingPostId !== null
+? editingPostId
+: Date.now(),
 
-title:title.value.trim(),
+title:
+title.value.trim(),
 
-category:category.value,
+category:
+category.value,
 
-date:date.value,
+date:
+date.value,
 
-description:description.value.trim(),
+description:
+description.value.trim(),
 
-officialLink:officialLink.value.trim()
+importantDates:
+importantDates.value.trim(),
+
+applicationFee:
+applicationFee.value.trim(),
+
+ageLimit:
+ageLimit.value.trim(),
+
+vacancyDetails:
+vacancyDetails.value.trim(),
+
+educationalQualification:
+educationalQualification.value.trim(),
+
+selectionProcess:
+selectionProcess.value.trim(),
+
+howToApply:
+howToApply.value.trim(),
+
+otherDetails:
+otherDetails.value.trim(),
+
+officialLink:
+officialLink.value.trim()
 
 };
 
 
-const posts=getPosts();
+const posts =
+getPosts();
+
+
+if(editingPostId !== null){
+
+const index =
+posts.findIndex(
+function(item){
+
+return item.id === editingPostId;
+
+}
+);
+
+
+if(index !== -1){
+
+posts[index]=post;
+
+}
+
+statusBox.textContent=
+"✅ Post সফলভাবে Update হয়েছে।";
+
+}else{
 
 posts.unshift(post);
+
+statusBox.textContent=
+"✅ Post সফলভাবে Save হয়েছে।";
+
+}
+
 
 savePosts(posts);
 
 renderPosts();
 
 
-statusBox.textContent=
-"✅ Post সফলভাবে Save হয়েছে।";
-
 statusBox.className=
 "status success";
 
 
-form.reset();
+resetForm();
 
-date.value=today;
 
-previewBox.innerHTML=
-"<h3>Post Save হয়েছে</h3><p class='meta'>নতুন Post তৈরি করতে আবার তথ্য লিখুন।</p>";
+setTimeout(
+function(){
 
-setTimeout(function(){
+statusBox.style.display=
+"none";
 
-statusBox.style.display="none";
-
-},3000);
+},
+3000
+);
 
 });
 
@@ -619,7 +1177,8 @@ statusBox.style.display="none";
 
 function renderPosts(){
 
-const posts=getPosts();
+const posts =
+getPosts();
 
 
 if(!posts.length){
@@ -632,34 +1191,103 @@ return;
 }
 
 
-postList.innerHTML=
-posts.map(function(post){
+postList.innerHTML =
+posts.map(
+function(post){
 
 return `
 
 <div class="post-item">
 
+<span class="badge">
+
+${escapeHTML(
+post.category || "Category"
+)}
+
+</span>
+
+
 <h3>
-${escapeHTML(post.title)}
+${escapeHTML(
+post.title
+)}
 </h3>
 
+
 <div class="meta">
-${escapeHTML(post.category)}
-•
-${escapeHTML(post.date)}
+
+${escapeHTML(
+post.date || ""
+)}
+
 </div>
 
-<p>
-${escapeHTML(post.description)}
+
+<p class="post-description">
+
+${formatText(
+post.description || ""
+)}
+
 </p>
 
+
+<div class="post-details">
+
+${
+post.importantDates
+? "📅 Important Dates • "
+: ""
+}
+
+${
+post.applicationFee
+? "💰 Fee • "
+: ""
+}
+
+${
+post.ageLimit
+? "🎂 Age • "
+: ""
+}
+
+${
+post.vacancyDetails
+? "👥 Vacancy • "
+: ""
+}
+
+${
+post.officialLink
+? "🔗 Official Link"
+: ""
+}
+
+</div>
+
+
 <div class="actions">
+
+
+<button
+class="btn btn-edit"
+onclick="editPost(${post.id})">
+
+✏️ Edit
+
+</button>
+
 
 <button
 class="btn btn-danger"
 onclick="deletePost(${post.id})">
+
 🗑️ Delete
+
 </button>
+
 
 </div>
 
@@ -667,19 +1295,130 @@ onclick="deletePost(${post.id})">
 
 `;
 
-}).join("");
+}
+).join("");
 
 }
+
+
+/* =========================
+   EDIT POST
+========================= */
+
+window.editPost =
+function(id){
+
+const posts =
+getPosts();
+
+
+const post =
+posts.find(
+function(item){
+
+return item.id === id;
+
+}
+);
+
+
+if(!post){
+
+return;
+
+}
+
+
+editingPostId=id;
+
+
+title.value =
+post.title || "";
+
+category.value =
+post.category || "";
+
+date.value =
+post.date || today;
+
+description.value =
+post.description || "";
+
+importantDates.value =
+post.importantDates || "";
+
+applicationFee.value =
+post.applicationFee || "";
+
+ageLimit.value =
+post.ageLimit || "";
+
+vacancyDetails.value =
+post.vacancyDetails || "";
+
+educationalQualification.value =
+post.educationalQualification || "";
+
+selectionProcess.value =
+post.selectionProcess || "";
+
+howToApply.value =
+post.howToApply || "";
+
+otherDetails.value =
+post.otherDetails || "";
+
+officialLink.value =
+post.officialLink || "";
+
+
+saveBtn.textContent =
+"💾 Update Post";
+
+cancelEditBtn.style.display =
+"inline-block";
+
+
+showPreview();
+
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+
+/* =========================
+   CANCEL EDIT
+========================= */
+
+cancelEditBtn.addEventListener(
+"click",
+function(){
+
+resetForm();
+
+}
+);
 
 
 /* =========================
    DELETE POST
 ========================= */
 
-window.deletePost=function(id){
+window.deletePost =
+function(id){
 
 const confirmDelete =
-confirm("এই Post-টি Delete করতে চান?");
+confirm(
+"এই Post-টি Delete করতে চান?"
+);
+
 
 if(!confirmDelete){
 
@@ -688,12 +1427,15 @@ return;
 }
 
 
-const posts=
+const posts =
 getPosts().filter(
 function(post){
-return post.id!==id;
+
+return post.id !== id;
+
 }
 );
+
 
 savePosts(posts);
 
@@ -710,15 +1452,30 @@ function escapeHTML(value){
 
 return String(value)
 
-.replace(/&/g,"&amp;")
+.replace(
+/&/g,
+"&amp;"
+)
 
-.replace(/</g,"&lt;")
+.replace(
+/</g,
+"&lt;"
+)
 
-.replace(/>/g,"&gt;")
+.replace(
+/>/g,
+"&gt;"
+)
 
-.replace(/"/g,"&quot;")
+.replace(
+/"/g,
+"&quot;"
+)
 
-.replace(/'/g,"&#039;");
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
@@ -727,11 +1484,20 @@ function escapeAttribute(value){
 
 return String(value)
 
-.replace(/"/g,"&quot;")
+.replace(
+/"/g,
+"&quot;"
+)
 
-.replace(/</g,"&lt;")
+.replace(
+/</g,
+"&lt;"
+)
 
-.replace(/>/g,"&gt;");
+.replace(
+/>/g,
+"&gt;"
+);
 
 }
 
@@ -758,7 +1524,12 @@ sessionStorage.removeItem(
 "wbhelp_admin_login"
 );
 
-window.location.href="admin.html";
+sessionStorage.removeItem(
+"wbhelp_admin_token"
+);
+
+window.location.href=
+"admin.html";
 
 });
 
